@@ -13,18 +13,20 @@ import java.util.Scanner;
  */
 public class Vista {
 
-    private String IdVuelo;
-    private String scanPrimerCognom;
-    private String scanSegonCognom;
+    private String pasajerNom;
+    private String pasajeroApellido;
+    private String pasajeroSegundoApellido;
+    private String pasajeroDNI;
 
-    private Billete billete;
+    private Pasajero pasajero;
 
-    public Vista(Billete b) {
+    public Vista(Pasajero b) {
 
-        this.billete = b;
-        scanNom = "";
-        scanPrimerCognom = "";
-        scanSegonCognom = "";
+        this.pasajero = b;
+        pasajerNom = "";
+        pasajeroApellido = "";
+        pasajeroSegundoApellido = "";
+        pasajeroDNI="";
     }
 
     public void getDades() {
@@ -34,15 +36,19 @@ public class Vista {
 
             Scanner scanner = new Scanner(System.in);
             System.out.println("Nom?");
-            scanNom = scanner.nextLine();
+            pasajerNom = scanner.nextLine();
 
             scanner = new Scanner(System.in);
             System.out.println("Primer cognom?");
-            scanPrimerCognom = scanner.nextLine();
+            pasajeroApellido = scanner.nextLine();
 
             scanner = new Scanner(System.in);
             System.out.println("Segon cognom?");
-            scanSegonCognom = scanner.nextLine();
+            pasajeroSegundoApellido = scanner.nextLine();
+            
+             scanner = new Scanner(System.in);
+            System.out.println("Dni?");
+            pasajeroSegundoApellido = scanner.nextLine();
 
             scanner = new Scanner(System.in);
             System.out.println("Dades correctes? (s/n)");
@@ -59,7 +65,7 @@ public class Vista {
         boolean ret = false;
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Sortir? (s/n)");
+        System.out.println("Salir? (s/n)");
         String s = scanner.nextLine();
         if (s.toUpperCase().equals("S")) {
             ret = true;
@@ -68,35 +74,45 @@ public class Vista {
         return ret;
     }
 
-    public String getScanNom() {
-        return scanNom;
+    public String getNom() {
+        return pasajerNom;
     }
 
-    public void setScanNom(String scanNom) {
-        this.scanNom = scanNom;
+    public void setNom(String nombre) {
+        this.pasajerNom = nombre;
     }
 
-    public String getScanPrimerCognom() {
-        return scanPrimerCognom;
+    public String getPrimerApellido() {
+        return pasajeroApellido;
     }
 
-    public void setScanPrimerCognom(String scanPrimerCognom) {
-        this.scanPrimerCognom = scanPrimerCognom;
+    public void setPrimerApellido(String prApellido) {
+        this.pasajeroApellido = prApellido;
     }
 
-    public String getScanSegonCognom() {
-        return scanSegonCognom;
+    public String getSegundoApellido() {
+        return pasajeroSegundoApellido;
     }
 
-    public void setScanSegonCognom(String scanSegonCognom) {
-        this.scanSegonCognom = scanSegonCognom;
+    public void setSegundoApellido(String sgApellido) {
+        this.pasajeroSegundoApellido = sgApellido;
     }
 
-    public void mostraDades() {
+    public String getPasajeroDNI() {
+        return pasajeroDNI;
+    }
+
+    public void setPasajeroDNI(String pasajeroDNI) {
+        this.pasajeroDNI = pasajeroDNI;
+    }
+    
+
+    public void muestraDatos() {
         System.out.println("============================");
-        System.out.println("Nom: " + model.getNom());
-        System.out.println("Cognom1: " + model.getPrimerCognom());
-        System.out.println("Cognom2: " + model.getSegonCognom());
+        System.out.println("Nom: " + pasajero.getNom());
+        System.out.println("Primer Apellido: " + pasajero.getPrApellido());
+        System.out.println("Segundo Apellido: " + pasajero.getSgApellido());
+        System.out.println("Dni " + pasajero.getDni());
         System.out.println("============================");
     }
 }
