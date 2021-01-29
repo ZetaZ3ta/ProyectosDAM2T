@@ -18,106 +18,95 @@ import m06.uf4.practica.Aplicacio.Model.Vuelo;
 /**
  *
  * @author IvánJM
- */ 
+ */
 public class PasajeroSQL {
-    
-}
-/*
-    public boolean registrarPasajero(Pasajero p) {
-        boolean registrar = false;
 
-        Statement stm = null;
-        Connection con = null;
-
-        String sql = "INSERT INTO Pasajero values ('" + p.getDNI() + "','" + p.getNombre() + "','"
-                + p.getApellido() + "','" + p.getIdAsiento() + "','" + p.getNumVuelo() + "')";
-
+    public static void insertarPasajero(Connection con, Pasajero p) throws DatosException {
+        Statement sentencia;
+        int id;
         try {
-            con = Conexion.conectar();
-            stm = con.createStatement();
-            stm.execute(sql);
-            registrar = true;
-            stm.close();
-            con.close();
-        } catch (SQLException e) {
-            System.out.println("Error en la clase PasajeroSQL (método registrar pasajero)");
-            e.printStackTrace();
+            sentencia = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            sentencia.executeQuery("SELECT * FROM pasajero");
+            ResultSet rs = sentencia.getResultSet();
+            rs.moveToInsertRow();
+            rs.updateString("DNI", p.getDNI());
+            rs.updateString("Nombre", p.getNombre());
+            rs.updateString("Apellido", p.getApellido());
+            rs.updateInt("numVuelo", p.getNumVuelo().getNumVuelo());
+            rs.updateString("idAsiento", p.getIdAsiento().getIdAsiento());
+            rs.updateString("IDbillete", p.getIDbillete());
+
+            rs.insertRow();
+        } catch (SQLException ex) {
+            throw new DatosException("Error: " + ex.toString());
         }
-        return registrar;
     }
 
-    public List<Pasajero> listarPasajero() {
-        Connection co = null;
-        Statement stm = null;
-        ResultSet rs = null;
+    public static ArrayList<Pasajero> cargarPasajero(Connection con) throws DatosException {
+        ArrayList<Pasajero> ret = new ArrayList<>();
 
-        String sql = "SELECT * FROM Pasajero";
-
-        List<Pasajero> listaPasajero = new ArrayList<Pasajero>();
+        Statement sentencia;
 
         try {
-            co = Conexion.conectar();
-            stm = co.createStatement();
-            rs = stm.executeQuery(sql);
+            sentencia = con.createStatement();
+            sentencia.executeQuery("SELECT * FROM asiento");
+            ResultSet rs = sentencia.getResultSet();
             while (rs.next()) {
-                Pasajero p = new Pasajero();
-                p.getDNI(rs.getString(1));
-                p.getNombre(rs.getString(2));
-                p.getApellido(rs.getString(3));
-                p.getNumVuelo(rs.getInt(4));
-                p.getIdAsiento(rs.getInt(5));
 
-                listaPasajero.add(p);
+                Vuelo v = new Vuelo(rs.getInt("numVuelo"), rs.getInt("capacidad"), rs.getTimestamp("Fecha y Hora"));
+                Asiento a = new Asiento(rs.getString("idAsiento"), v, rs.getBoolean("Lleno"));
+                ret.add(new Pasajero(rs.getString("DNI"), rs.getString("Nombre"), rs.getString("Apellido"), v, a, rs.getString("IDbillete")));
+
             }
-            stm.close();
-            rs.close();
-            co.close();
-        } catch (SQLException e) {
-            System.out.println("Error en la clase PasajeroSQL (método listar pasajero)");
-            e.printStackTrace();
-        }
 
-        return listaPasajero;
+        } catch (SQLException ex) {
+            throw new DatosException("Error: " + ex.toString());
+        }
+        return ret;
     }
 
-    public boolean actualizarPasajero(Pasajero p) {
-        Connection connect = null;
-        Statement stm = null;
+    public static void actualizarPasajero(Connection con, Pasajero p) throws DatosException {
+        Statement sentencia;
 
-        boolean actualizar = false;
-
-        String sql = "UPDATE Pasajero SET DNI='" + p.getDNI() + "', Nombre='" + p.getNombre() + "'," + "Apellido='" + p.getApellido() + "', numVuelo='"
-                + p.getNumVuelo() + "', idAsiento='" + p.getIdAsiento() + "'" + "WHERE ID=" + p.getDNI();
         try {
-            connect = Conexion.conectar();
-            stm = connect.createStatement();
-            stm.execute(sql);
-            actualizar = true;
-        } catch (SQLException e) {
-            System.out.println("Error en la clase PasajeroSQL (método actualizar pasajero)");
-            e.printStackTrace();
+            sentencia = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            sentencia.executeQuery("SELECT * FROM pasajero where DNI='" + p.getDNI() + "'");
+            ResultSet rs = sentencia.getResultSet();
+            if (rs.next()) {
+                rs.updateString("DNI", p.getDNI());
+                rs.updateString("Nombre", p.getNombre());
+                rs.updateString("Apellido", p.getApellido());
+                rs.updateInt("numVuelo", p.getNumVuelo().getNumVuelo());
+                rs.updateString("idAsiento", p.getIdAsiento().getIdAsiento());
+                rs.updateString("IDbillete", p.getIDbillete());
+
+                rs.updateRow();
+            } else {
+                throw new DatosException("El pasajero " + p + "no se a encontrado");
+            }
+
+        } catch (SQLException ex) {
+            throw new DatosException("Error: " + ex.toString());
         }
-        return actualizar;
     }
 
-    public boolean eliminarPasajero(Pasajero p) {
-        Connection connect = null;
-        Statement stm = null;
+    public static void eliminarPasajero(Connection con, Pasajero p) throws DatosException {
+        Statement sentencia;
 
-        boolean eliminar = false;
-
-        String sql = "DELETE FROM Pasajero WHERE ID=" + p.getDNI();
         try {
-            connect = Conexion.conectar();
-            stm = connect.createStatement();
-            stm.execute(sql);
-            eliminar = true;
-        } catch (SQLException e) {
-            System.out.println("Error en la clase PasajeroSQL (método eliminar pasajero)");
-            e.printStackTrace();
+            sentencia = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM pasajero where ID = '" + p.getDNI() + "'";
+            sentencia.executeQuery(sql);
+            ResultSet rs = sentencia.getResultSet();
+            if (rs.next()) {
+                rs.deleteRow();
+            }
+
+        } catch (SQLException ex) {
+            throw new DatosException("Error: " + ex.toString());
         }
-        return eliminar;
     }
 
 }
-*/

@@ -15,13 +15,23 @@ public class Pasajero {
     private String apellido;
     private Vuelo numVuelo;
     private Asiento idAsiento;
+    private String IDbillete;
 
-    public Pasajero(String DNI, String nombre, String apellido, Vuelo numVuelo, Asiento idAsiento) {
+    public Pasajero(String DNI, String nombre, String apellido, Vuelo numVuelo, Asiento idAsiento, String IDbillete) {
         this.DNI = DNI;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.numVuelo = new Vuelo();
-        this.idAsiento = new Asiento();
+        this.numVuelo = numVuelo;
+        this.idAsiento = idAsiento;
+        this.IDbillete =  IDbillete;
+    }
+
+    public String getIDbillete() {
+        return IDbillete;
+    }
+
+    public void setIDbillete(String IDbillete) {
+        this.IDbillete = IDbillete;
     }
 
     public Pasajero() {
