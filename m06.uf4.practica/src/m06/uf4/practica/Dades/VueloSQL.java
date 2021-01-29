@@ -3,8 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 package m06.uf4.practica.Dades;
 
 import java.sql.Connection;
@@ -13,108 +11,93 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import m06.uf4.practica.Aplicacio.Model.Asiento;
+import m06.uf4.practica.Aplicacio.Model.Pasajero;
 import m06.uf4.practica.Aplicacio.Model.Vuelo;
 
 /**
  *
  * @author IvánJM
- */ /*
-public class VueloDaoSQL {
+ */
+public class VueloSQL {
 
+    public static void insertarVuelo(Connection con, Vuelo v) throws DatosException {
+        Statement sentencia;
+        int id;
+        try {
+            sentencia = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-    public boolean registrarVuelo(Vuelo v) {
-        boolean registrar = false;
+            sentencia.executeQuery("SELECT * FROM vuelo");
+            ResultSet rs = sentencia.getResultSet();
+            rs.moveToInsertRow();
+            rs.updateInt("numVuelo", v.getNumVuelo());
+            rs.updateInt("capacidad", v.getNumVuelo());
+            rs.updateTimestamp("Fecha y Hora", v.getFecha_hora());
 
-        Statement stm = null;
-        Connection con = null;
+            rs.insertRow();
+        } catch (SQLException ex) {
+            throw new DatosException("Error: " + ex.toString());
+        }
+    }
 
-        String sql = "INSERT INTO Vuelo values ('" + v.getNumVuelo() + "','"+ v.getCapacidad() + "','" + v.getFecha_hora() + "')";
+    public static ArrayList<Vuelo> cargarVuelo(Connection con) throws DatosException {
+        ArrayList<Vuelo> ret = new ArrayList<>();
+
+        Statement sentencia;
 
         try {
-            con = Conexion.conectar();
-            stm = con.createStatement();
-            stm.execute(sql);
-            registrar = true;
-            stm.close();
-            con.close();
-        } catch (SQLException e) {
-            System.out.println("Error en la clase VueloDaoSQL (método registrar vuelo)");
-            e.printStackTrace();
+            sentencia = con.createStatement();
+            sentencia.executeQuery("SELECT * FROM vuelo");
+            ResultSet rs = sentencia.getResultSet();
+            while (rs.next()) {
+
+                ret.add(new Vuelo(rs.getInt("numVuelo"), rs.getInt("capacidad"), rs.getTimestamp("Fecha y Hora")));
+
+            }
+
+        } catch (SQLException ex) {
+            throw new DatosException("Error: " + ex.toString());
         }
-        return registrar;
+        return ret;
     }
 
+    public static void actualizarVuelo(Connection con, Vuelo v) throws DatosException {
+        Statement sentencia;
 
-    public List<Vuelo> listarVuelo() {
-       Connection co =null;
-		Statement stm= null;
-		ResultSet rs=null;
-		
-		String sql="SELECT * FROM Vuelo";
-		
-		List<Vuelo> listaVuelo= new ArrayList<Vuelo>();
-		
-		try {			
-			co= Conexion.conectar();
-			stm=co.createStatement();
-			rs=stm.executeQuery(sql);
-			while (rs.next()) {
-				Vuelo v = new Vuelo();
-                                v.setNumVuelo(rs.getInt(1));
-				v.setCapacidad(rs.getInt(2));
-				v.setFecha_hora(rs.getTimestamp(3));
-				listaVuelo.add(v);
-			}
-			stm.close();
-			rs.close();
-			co.close();
-		} catch (SQLException e) {
-			System.out.println("Error en la clase VueloDaoSQL (método listar vuelo)");
-			e.printStackTrace();
-		}
-		
-		return listaVuelo;
+        try {
+            sentencia = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            sentencia.executeQuery("SELECT * FROM vuelo where numVuelo='" + v.getNumVuelo() + "'");
+            ResultSet rs = sentencia.getResultSet();
+            if (rs.next()) {
+                rs.updateInt("numVuelo", v.getNumVuelo());
+                rs.updateInt("capacidad", v.getCapacidad());
+                rs.updateTimestamp("Fecha y Hora", v.getFecha_hora());
+
+                rs.updateRow();
+            } else {
+                throw new DatosException("El asiento " + v + "no se a encontrado");
+            }
+
+        } catch (SQLException ex) {
+            throw new DatosException("Error: " + ex.toString());
+        }
     }
 
+    public static void eliminarVuelo(Connection con, Vuelo v) throws DatosException {
+        Statement sentencia;
 
-    public boolean actualizarVuelo(Vuelo v) {
-       Connection connect= null;
-		Statement stm= null;
-		
-		boolean actualizar=false;
-				
-		String sql="UPDATE Vuelo SET numVuelo='"+v.getNumVuelo()+"', capacidad='"+v.getCapacidad()+"', Fecha y Hora='"+v.getFecha_hora()+"'" +" WHERE ID="+v.getNumVuelo();
-		try {
-			connect=Conexion.conectar();
-			stm=connect.createStatement();
-			stm.execute(sql);
-			actualizar=true;
-		} catch (SQLException e) {
-			System.out.println("Error en la clase VueloDaoSQL (método actualizar vuelo)");
-			e.printStackTrace();
-		}		
-		return actualizar;
+        try {
+            sentencia = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM vuelo where numVuelo = '" + v.getNumVuelo() + "'";
+            sentencia.executeQuery(sql);
+            ResultSet rs = sentencia.getResultSet();
+            if (rs.next()) {
+                rs.deleteRow();
+            }
+
+        } catch (SQLException ex) {
+            throw new DatosException("Error: " + ex.toString());
+        }
     }
-
-
-    public boolean eliminarVuelo(Vuelo v) {
-        Connection connect= null;
-		Statement stm= null;
-		
-		boolean eliminar=false;
-				
-		String sql="DELETE FROM Vuelo WHERE ID="+v.getNumVuelo();
-		try {
-			connect=Conexion.conectar();
-			stm=connect.createStatement();
-			stm.execute(sql);
-			eliminar=true;
-		} catch (SQLException e) {
-			System.out.println("Error en la clase VueloDaoSQL (método eliminar vuelo)");
-			e.printStackTrace();
-		}		
-		return eliminar;
-    }
-
 }
-*/

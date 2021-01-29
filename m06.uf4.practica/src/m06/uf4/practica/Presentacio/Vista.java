@@ -18,9 +18,9 @@ public class Vista {
     private String pasajeroSegundoApellido;
     private String pasajeroDNI;
 
-    private Pasajero pasajero;
+    private Pasajeromvc pasajero;
 
-    public Vista(Pasajero b) {
+    public Vista(Pasajeromvc b) {
 
         this.pasajero = b;
         pasajerNom = "";
@@ -48,7 +48,7 @@ public class Vista {
             
              scanner = new Scanner(System.in);
             System.out.println("Dni?");
-            pasajeroSegundoApellido = scanner.nextLine();
+            pasajeroDNI = scanner.nextLine();
 
             scanner = new Scanner(System.in);
             System.out.println("Dades correctes? (s/n)");
@@ -112,7 +112,7 @@ public class Vista {
         System.out.println("Nom: " + pasajero.getNom());
         System.out.println("Primer Apellido: " + pasajero.getPrApellido());
         System.out.println("Segundo Apellido: " + pasajero.getSgApellido());
-        System.out.println("Dni " + pasajero.getDni());
+        System.out.println("Dni: " + pasajero.getDni());
         System.out.println("============================");
     }
 }

@@ -9,14 +9,14 @@ package m06.uf4.practica.Presentacio;
  *
  * @author leandroparedes
  */
-public class Pasajero {
+public class Pasajeromvc {
 
     private String nom;
     private String prApellido;
     private String sgApellido;
     private String dni;
 
-    public Pasajero(String nom, String primerCognom, String segonCognom, String dni) {
+    public Pasajeromvc(String nom, String primerCognom, String segonCognom, String dni) {
         this.nom = nom;
         this.prApellido = primerCognom;
         this.sgApellido = segonCognom;
@@ -54,6 +54,4 @@ public class Pasajero {
     public void setDni(String dni) {
         this.dni = dni;
     }
-
-   
 }
