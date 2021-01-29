@@ -11,13 +11,24 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import m06.uf4.practica.Aplicacio.AplicacionException;
+import m06.uf4.practica.Aplicacio.DriverMySql;
 import m06.uf4.practica.Aplicacio.Model.Asiento;
 
 /**
  *
  * @author IvánJM
- */ /*
+ */ 
 public class AsientoSQL {
+    
+    DriverMySql dms;
+    
+     public AsientoSQL(DriverMySql c) throws AplicacionException {
+        if (c.getConnection() == null)
+            throw new AplicacionException("Sense connexió a BBDD");
+        else
+            this.dms = c;
+    }
 
     public boolean registrarAsiento(Asiento a) {
         boolean registrar = false;
@@ -25,7 +36,7 @@ public class AsientoSQL {
         Statement stm = null;
         Connection con = null;
 
-        String sql = "INSERT INTO Asiento values ('" + a.getIdAsiento() + "','" + a.getNumVuelo() + "','" + a.getLleno() + "')";
+        String sql = "INSERT INTO asiento values ('" + a.getIdAsiento() + "','" + a.getNumVuelo() + "','" + a.getLleno() + "')";
 
         try {
             con = Conexion.conectar();
@@ -46,12 +57,12 @@ public class AsientoSQL {
         Statement stm = null;
         ResultSet rs = null;
 
-        String sql = "SELECT * FROM Vuelo";
+        String sql = "SELECT * FROM asiento";
 
-        List<Asiento> listaVuelo = new ArrayList<Asiento>();
+        List<Asiento> listaAsiento = new ArrayList<Asiento>();
 
         try {
-            co = Conexion.conectar();
+            co = ;
             stm = co.createStatement();
             rs = stm.executeQuery(sql);
             while (rs.next()) {
@@ -59,7 +70,7 @@ public class AsientoSQL {
                 a.getIdAsiento(rs.getInt(1));
                 a.getNumVuelo(rs.getInt(2));
                 a.getLleno(rs.getBoolean(3));
-                listaVuelo.add(a);
+                listaAsiento.add(a);
             }
             stm.close();
             rs.close();
@@ -78,8 +89,8 @@ public class AsientoSQL {
 
         boolean actualizar = false;
 
-        String sql = "UPDATE Asiento SET idAsiento='" + a.getIdAsiento() + "', numVuelo='" + a.getNumVuelo() + "',"
-                + "lleno='" + a.getLleno() + "'" + " WHERE ID=" + a.getIdAsiento();
+        String sql = "UPDATE asiento SET idAsiento='" + a.getIdAsiento() + "', numVuelo='" + a.getNumVuelo() + "',"
+                + "Lleno='" + a.getLleno() + "'" + " WHERE ID=" + a.getIdAsiento();
         try {
             connect = Conexion.conectar();
             stm = connect.createStatement();
@@ -112,4 +123,3 @@ public class AsientoSQL {
     }
 
 }
-*/
