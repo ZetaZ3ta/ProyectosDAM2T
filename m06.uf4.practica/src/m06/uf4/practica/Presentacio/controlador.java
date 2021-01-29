@@ -16,9 +16,9 @@ import javafx.scene.control.Label;
  *
  * @author leandroparedes
  */
-public class FXMLDocumentController implements Initializable {
+public class controlador  {
     
-    private Label label;
+   /* private Label label;
     
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
@@ -28,11 +28,11 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    private Pasajero pasajero;
+    }  */  
+    private Pasajeromvc pasajero;
     private Vista vista;
     
-     public FXMLDocumentController(Pasajero p, Vista v ) {
+     public controlador(Pasajeromvc p, Vista v ) {
         pasajero = p;
         vista = v;
         initView();
@@ -57,7 +57,7 @@ public class FXMLDocumentController implements Initializable {
         }
         while (!acabado);
     }
-
+    
     /*recull del pasajero i actualitza la vista*/
     private void cargarRegistros() {
         vista.setNom(pasajero.getNom());
@@ -71,12 +71,13 @@ public class FXMLDocumentController implements Initializable {
         pasajero.setNom(vista.getNom());
         pasajero.setPrApellido(vista.getPrimerApellido());
         pasajero.setSgApellido(vista.getSegundoApellido());
+        pasajero.setDni(vista.getPasajeroDNI());
     }
     
      public static void main(String[] args) {
-        Pasajero pasajero = new Pasajero("", "", "","");
+        Pasajeromvc pasajero = new Pasajeromvc("", "", "","");
         Vista v = new Vista(pasajero);
-        FXMLDocumentController c = new FXMLDocumentController(pasajero, v);
+        controlador c = new controlador(pasajero, v);
         c.initController();
     }
 }
