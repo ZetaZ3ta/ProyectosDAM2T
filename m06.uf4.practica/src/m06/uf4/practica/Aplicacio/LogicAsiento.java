@@ -2,6 +2,8 @@ package m06.uf4.practica.Aplicacio;
 
 import java.util.ArrayList;
 import m06.uf4.practica.Aplicacio.Model.Asiento;
+import m06.uf4.practica.Dades.AsientoSQL;
+import m06.uf4.practica.Dades.DatosException;
 
 /**
  *
@@ -9,32 +11,51 @@ import m06.uf4.practica.Aplicacio.Model.Asiento;
  */
 public class LogicAsiento {
 
-    DriverMySql conn;
+    public static ArrayList<Asiento> getAsientos() throws AplicacionException {
+        try {
+            DriverMySql conn = null;
+            ArrayList<Asiento> ret = null;
 
-    public LogicAsiento(DriverMySql c) throws AplicacionException {
-        if (c.getConnection() == null) {
-            throw new AplicacionException("Sense connexió a BBDD");
-        } else {
-            this.conn = c;
+            conn = DriverMySql.getInstance();
+            ret = AsientoSQL.cargarAsiento(conn.getConnection());
+
+            return ret;
+        } catch (DatosException ex) {
+            throw new AplicacionException("Error cargando asientos!");
+        }
+
+    }
+
+    public static void insertarAsiento(Asiento a) throws AplicacionException {
+        try {
+            DriverMySql conn = null;
+            conn = DriverMySql.getInstance();
+
+            AsientoSQL.insertarAsiento(conn.getConnection(), a);
+        } catch (DatosException ex) {
+            throw new AplicacionException("Error insertando asientos!");
         }
     }
 
-    public ArrayList<Asiento> getAsientos() throws AplicacionException {
-//        ArrayList<Pasajero> ret = PasajeroSQL.selectAlumnes(conn.getConnection());
-        ArrayList<Asiento> ret = null;
-        return ret;
+    public static void eliminarAsiento(Asiento a) throws AplicacionException {
+        try {
+            DriverMySql conn = null;
+            conn = DriverMySql.getInstance();
 
+            AsientoSQL.eliminarAsiento(conn.getConnection(), a);
+        } catch (DatosException ex) {
+            throw new AplicacionException("Error eliminando asientos!");
+        }
     }
 
-    public static void insertarAsiento() {
+    public static void modificarAsiento(Asiento a) throws AplicacionException {
+        try {
+            DriverMySql conn = null;
+            conn = DriverMySql.getInstance();
 
-    }
-
-    public static void eliminarAsiento() {
-
-    }
-
-    public static void modificarAsiento() {
-
+            AsientoSQL.actualizarAsiento(conn.getConnection(), a);
+        } catch (DatosException ex) {
+            throw new AplicacionException("Error modificando asientos!");
+        }
     }
 }
