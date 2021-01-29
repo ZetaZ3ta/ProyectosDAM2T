@@ -12,5 +12,7 @@ package m06.uf4.practica.Aplicacio.Reglas;
 public class test {
     public void leo(){
         System.out.println("leo");
+        
+        System.out.println("leandro2");
     }
 }
