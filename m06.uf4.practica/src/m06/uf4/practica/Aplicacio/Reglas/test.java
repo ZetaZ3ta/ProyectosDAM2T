@@ -13,6 +13,6 @@ public class test {
     public void leo(){
         System.out.println("leo");
         
-        System.out.println("leandro2");
+        System.out.println("LEANDRO ERES UN CHUCHA");
     }
 }

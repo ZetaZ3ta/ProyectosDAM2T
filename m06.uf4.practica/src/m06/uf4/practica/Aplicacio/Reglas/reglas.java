@@ -11,7 +11,4 @@ package m06.uf4.practica.Aplicacio.Reglas;
  */
 public class reglas {
 
-    public static void HOlaLOCOOO() {
-        System.out.println("HOLA LOCO");
-    }
 }
