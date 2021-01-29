@@ -15,9 +15,9 @@ public class Asiento {
     
     private String idAsiento;
     private Vuelo numVuelo;
-    private int lleno;
+    private Boolean lleno;
 
-    public Asiento(String idAsiento, Vuelo numVuelo, int lleno) {
+    public Asiento(String idAsiento, Vuelo numVuelo, Boolean lleno) {
         this.idAsiento = idAsiento;
         this.numVuelo = new Vuelo();
         this.lleno = lleno;
@@ -42,11 +42,11 @@ public class Asiento {
         this.numVuelo = numVuelo;
     }
 
-    public int getLleno() {
+    public boolean getLleno() {
         return lleno;
     }
 
-    public void setLleno(int lleno) {
+    public void setLleno(boolean lleno) {
         this.lleno = lleno;
     }
 

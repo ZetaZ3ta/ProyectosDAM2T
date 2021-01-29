@@ -18,10 +18,10 @@ import m06.uf4.practica.Aplicacio.Model.Vuelo;
 /**
  *
  * @author IvánJM
- *//*
-public class VueloDaoSQL implements IVueloDAO {
+ */ /*
+public class VueloDaoSQL {
 
-    @Override
+
     public boolean registrarVuelo(Vuelo v) {
         boolean registrar = false;
 
@@ -44,7 +44,7 @@ public class VueloDaoSQL implements IVueloDAO {
         return registrar;
     }
 
-    @Override
+
     public List<Vuelo> listarVuelo() {
        Connection co =null;
 		Statement stm= null;
@@ -63,8 +63,6 @@ public class VueloDaoSQL implements IVueloDAO {
                                 v.setNumVuelo(rs.getInt(1));
 				v.setCapacidad(rs.getInt(2));
 				v.setFecha_hora(rs.getTimestamp(3));
-				
-				
 				listaVuelo.add(v);
 			}
 			stm.close();
@@ -78,7 +76,7 @@ public class VueloDaoSQL implements IVueloDAO {
 		return listaVuelo;
     }
 
-    @Override
+
     public boolean actualizarVuelo(Vuelo v) {
        Connection connect= null;
 		Statement stm= null;
@@ -98,7 +96,7 @@ public class VueloDaoSQL implements IVueloDAO {
 		return actualizar;
     }
 
-    @Override
+
     public boolean eliminarVuelo(Vuelo v) {
         Connection connect= null;
 		Statement stm= null;
