@@ -1,7 +1,7 @@
 package m06.uf4.practica.Aplicacio;
 
 import java.util.ArrayList;
-import m06.uf4.practica.Aplicacio.Model.Asiento;
+import m06.uf4.practica.Aplicacio.Model.Vuelo;
 
 /**
  *
@@ -9,21 +9,18 @@ import m06.uf4.practica.Aplicacio.Model.Asiento;
  */
 public class LogicVuelo {
 
-    DriverMySql conn;
-
-    public LogicVuelo(DriverMySql c) throws AplicacionException {
-        if (c.getConnection() == null) {
-            throw new AplicacionException("Sense connexió a BBDD");
-        } else {
-            this.conn = c;
-        }
-    }
-
-    public ArrayList<Asiento> getVuelos() throws AplicacionException {
-//        ArrayList<Pasajero> ret = PasajeroSQL.selectAlumnes(conn.getConnection());
-        ArrayList<Asiento> ret = null;
+    public ArrayList<Vuelo> getVuelos() throws AplicacionException {
+//        try {
+        DriverMySql conn = null;
+        ArrayList<Vuelo> ret = null;
+//
+//            conn = DriverMySql.getInstance();
+//            ret = VueloSQL(conn.getConnection());
+//
+//            return ret;
+//        } catch (DatosException ex) {
+//            throw new AplicacionException("Error cargando pasajeros!");
         return ret;
-
     }
 
     public static void insertarVuelo() {

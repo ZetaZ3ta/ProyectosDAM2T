@@ -2,6 +2,8 @@ package m06.uf4.practica.Aplicacio;
 
 import java.util.ArrayList;
 import m06.uf4.practica.Aplicacio.Model.Pasajero;
+import m06.uf4.practica.Dades.DatosException;
+import m06.uf4.practica.Dades.PasajeroSQL;
 
 /**
  *
@@ -9,33 +11,52 @@ import m06.uf4.practica.Aplicacio.Model.Pasajero;
  */
 public class LogicPasajero {
 
-    DriverMySql conn;
+    public static ArrayList<Pasajero> getPasajeros() throws AplicacionException {
+        try {
+            DriverMySql conn = null;
+            ArrayList<Pasajero> ret = null;
 
-    public LogicPasajero(DriverMySql c) throws AplicacionException {
-        if (c.getConnection() == null) {
-            throw new AplicacionException("Sense connexió a BBDD");
-        } else {
-            this.conn = c;
+            conn = DriverMySql.getInstance();
+            ret = PasajeroSQL.cargarPasajero(conn.getConnection());
+
+            return ret;
+        } catch (DatosException ex) {
+            throw new AplicacionException("Error cargando pasajeros!");
+        }
+
+    }
+
+    public static void insertarPasajero(Pasajero p) throws AplicacionException {
+        try {
+            DriverMySql conn = null;
+            conn = DriverMySql.getInstance();
+
+            PasajeroSQL.insertarPasajero(conn.getConnection(), p);
+        } catch (DatosException ex) {
+            throw new AplicacionException("Error insertando pasajeros!");
         }
     }
 
-    public ArrayList<Pasajero> getPasajeros() throws AplicacionException {
-//        ArrayList<Pasajero> ret = PasajeroSQL.selectAlumnes(conn.getConnection());
-        ArrayList<Pasajero> ret = null;
-        return ret;
+    public static void eliminarPasajero(Pasajero p) throws AplicacionException {
+        try {
+            DriverMySql conn = null;
+            conn = DriverMySql.getInstance();
 
+            PasajeroSQL.eliminarPasajero(conn.getConnection(), p);
+        } catch (DatosException ex) {
+            throw new AplicacionException("Error insertando pasajeros!");
+        }
     }
 
-    public static void insertarPasajero() {
+    public static void modificarPasajero(Pasajero p) throws AplicacionException {
+        try {
+            DriverMySql conn = null;
+            conn = DriverMySql.getInstance();
 
-    }
-
-    public static void eliminarPasajero() {
-
-    }
-
-    public static void modificarPasajero() {
-
+            PasajeroSQL.actualizarPasajero(conn.getConnection(), p);
+        } catch (DatosException ex) {
+            throw new AplicacionException("Error insertando pasajeros!");
+        }
     }
 
 }

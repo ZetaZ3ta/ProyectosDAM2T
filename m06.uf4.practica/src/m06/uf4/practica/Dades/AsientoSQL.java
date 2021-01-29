@@ -10,9 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
-import m06.uf4.practica.Aplicacio.AplicacionException;
-import m06.uf4.practica.Aplicacio.DriverMySql;
 import m06.uf4.practica.Aplicacio.Model.Asiento;
 import m06.uf4.practica.Aplicacio.Model.Vuelo;
 
