@@ -13,8 +13,8 @@ public class LogicAsiento {
 
     public static ArrayList<Asiento> getAsientos() throws AplicacionException {
         try {
-            DriverMySql conn = null;
-            ArrayList<Asiento> ret = null;
+            DriverMySql conn;
+            ArrayList<Asiento> ret;
 
             conn = DriverMySql.getInstance();
             ret = AsientoSQL.cargarAsiento(conn.getConnection());
@@ -28,7 +28,7 @@ public class LogicAsiento {
 
     public static void insertarAsiento(Asiento a) throws AplicacionException {
         try {
-            DriverMySql conn = null;
+            DriverMySql conn;
             conn = DriverMySql.getInstance();
 
             AsientoSQL.insertarAsiento(conn.getConnection(), a);
@@ -39,7 +39,7 @@ public class LogicAsiento {
 
     public static void eliminarAsiento(Asiento a) throws AplicacionException {
         try {
-            DriverMySql conn = null;
+            DriverMySql conn;
             conn = DriverMySql.getInstance();
 
             AsientoSQL.eliminarAsiento(conn.getConnection(), a);
@@ -50,7 +50,7 @@ public class LogicAsiento {
 
     public static void modificarAsiento(Asiento a) throws AplicacionException {
         try {
-            DriverMySql conn = null;
+            DriverMySql conn;
             conn = DriverMySql.getInstance();
 
             AsientoSQL.actualizarAsiento(conn.getConnection(), a);

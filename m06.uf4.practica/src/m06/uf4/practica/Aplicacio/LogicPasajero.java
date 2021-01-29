@@ -13,8 +13,8 @@ public class LogicPasajero {
 
     public static ArrayList<Pasajero> getPasajeros() throws AplicacionException {
         try {
-            DriverMySql conn = null;
-            ArrayList<Pasajero> ret = null;
+            DriverMySql conn;
+            ArrayList<Pasajero> ret;
 
             conn = DriverMySql.getInstance();
             ret = PasajeroSQL.cargarPasajero(conn.getConnection());
@@ -28,7 +28,7 @@ public class LogicPasajero {
 
     public static void insertarPasajero(Pasajero p) throws AplicacionException {
         try {
-            DriverMySql conn = null;
+            DriverMySql conn;
             conn = DriverMySql.getInstance();
 
             PasajeroSQL.insertarPasajero(conn.getConnection(), p);
@@ -39,7 +39,7 @@ public class LogicPasajero {
 
     public static void eliminarPasajero(Pasajero p) throws AplicacionException {
         try {
-            DriverMySql conn = null;
+            DriverMySql conn;
             conn = DriverMySql.getInstance();
 
             PasajeroSQL.eliminarPasajero(conn.getConnection(), p);
@@ -50,7 +50,7 @@ public class LogicPasajero {
 
     public static void modificarPasajero(Pasajero p) throws AplicacionException {
         try {
-            DriverMySql conn = null;
+            DriverMySql conn;
             conn = DriverMySql.getInstance();
 
             PasajeroSQL.actualizarPasajero(conn.getConnection(), p);
