@@ -41,7 +41,7 @@ public class AsientoSQL {
         }
     }
 
-    public static ArrayList<Asiento> cargarAsiento(Connection con) throws DatosException {
+        public static ArrayList<Asiento> cargarAsiento(Connection con) throws DatosException {
         ArrayList<Asiento> ret = new ArrayList<>();
 
         Statement sentencia;
