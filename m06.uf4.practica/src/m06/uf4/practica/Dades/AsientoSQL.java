@@ -14,112 +14,94 @@ import java.util.List;
 import m06.uf4.practica.Aplicacio.AplicacionException;
 import m06.uf4.practica.Aplicacio.DriverMySql;
 import m06.uf4.practica.Aplicacio.Model.Asiento;
+import m06.uf4.practica.Aplicacio.Model.Vuelo;
 
 /**
  *
  * @author IvánJM
- */ 
+ */
 public class AsientoSQL {
-    
-    DriverMySql dms;
-    /*
-     public AsientoSQL(DriverMySql c) throws AplicacionException {
-        if (c.getConnection() == null)
-            throw new AplicacionException("Sense connexió a BBDD");
-        else
-            this.dms = c;
-    }
 
-    public boolean registrarAsiento(Asiento a) {
-        boolean registrar = false;
-
-        Statement stm = null;
-        Connection con = null;
-
-        String sql = "INSERT INTO asiento values ('" + a.getIdAsiento() + "','" + a.getNumVuelo() + "','" + a.getLleno() + "')";
-
+    public static void insertarAsiento(Connection con, Asiento a) throws DatosException {
+        Statement sentencia;
+        int id;
         try {
-            con = Conexion.conectar();
-            stm = con.createStatement();
-            stm.execute(sql);
-            registrar = true;
-            stm.close();
-            con.close();
-        } catch (SQLException e) {
-            System.out.println("Error en la clase AsientoSQL (método registrar asiento)");
-            e.printStackTrace();
+            sentencia = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            sentencia.executeQuery("SELECT * FROM asiento");
+            ResultSet rs = sentencia.getResultSet();
+            rs.moveToInsertRow();
+            rs.updateString("idAsiento", a.getIdAsiento());
+            rs.updateInt("numVuelo", a.getNumVuelo().getNumVuelo());
+            rs.updateBoolean("Lleno", a.getLleno());
+
+            rs.insertRow();
+        } catch (SQLException ex) {
+            throw new DatosException("Error: " + ex.toString());
         }
-        return registrar;
     }
 
-    public List<Asiento> listarAsiento() {
-        Connection co = null;
-        Statement stm = null;
-        ResultSet rs = null;
+    public static ArrayList<Asiento> cargarAsiento(Connection con) throws DatosException {
+        ArrayList<Asiento> ret = new ArrayList<>();
 
-        String sql = "SELECT * FROM asiento";
-
-        List<Asiento> listaAsiento = new ArrayList<Asiento>();
+        Statement sentencia;
 
         try {
-            co = ;
-            stm = co.createStatement();
-            rs = stm.executeQuery(sql);
+            sentencia = con.createStatement();
+            sentencia.executeQuery("SELECT * FROM asiento");
+            ResultSet rs = sentencia.getResultSet();
             while (rs.next()) {
-                Asiento a = new Asiento();
-                a.getIdAsiento(rs.getInt(1));
-                a.getNumVuelo(rs.getInt(2));
-                a.getLleno(rs.getBoolean(3));
-                listaAsiento.add(a);
+
+                Vuelo v = new Vuelo(rs.getInt("numVuelo"), rs.getInt("capacidad"), rs.getTimestamp("Fecha y Hora"));
+
+                ret.add(new Asiento(rs.getString("idAsiento"), v, rs.getBoolean("Lleno")));
+
             }
-            stm.close();
-            rs.close();
-            co.close();
-        } catch (SQLException e) {
-            System.out.println("Error en la clase AsientoSQL (método listar asiento)");
-            e.printStackTrace();
-        }
 
-        return listaVuelo;
+        } catch (SQLException ex) {
+            throw new DatosException("Error: " + ex.toString());
+        }
+        return ret;
     }
 
-    public boolean actualizarAsiento(Asiento a) {
-        Connection connect = null;
-        Statement stm = null;
+    public static void actualizarAsiento(Connection con, Asiento a) throws DatosException {
+        Statement sentencia;
 
-        boolean actualizar = false;
-
-        String sql = "UPDATE asiento SET idAsiento='" + a.getIdAsiento() + "', numVuelo='" + a.getNumVuelo() + "',"
-                + "Lleno='" + a.getLleno() + "'" + " WHERE ID=" + a.getIdAsiento();
         try {
-            connect = Conexion.conectar();
-            stm = connect.createStatement();
-            stm.execute(sql);
-            actualizar = true;
-        } catch (SQLException e) {
-            System.out.println("Error en la clase AsientoSQL (método actualizar asiento)");
-            e.printStackTrace();
+            sentencia = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            sentencia.executeQuery("SELECT * FROM asiento where idAsiento='" + a.getIdAsiento() + "'");
+            ResultSet rs = sentencia.getResultSet();
+            if (rs.next()) {
+                rs.updateString("idAsiento", a.getIdAsiento());
+                rs.updateInt("numVuelo", a.getNumVuelo().getNumVuelo());
+                rs.updateBoolean("Lleno", a.getLleno());
+
+                rs.updateRow();
+            } else {
+                throw new DatosException("El asiento " + a + "no se a encontrado");
+            }
+
+        } catch (SQLException ex) {
+            throw new DatosException("Error: " + ex.toString());
         }
-        return actualizar;
     }
 
-    public boolean eliminarAsiento(Asiento a) {
-        Connection connect = null;
-        Statement stm = null;
+    public static void eliminarAsiento(Connection con, Asiento a) throws DatosException {
+        Statement sentencia;
 
-        boolean eliminar = false;
-
-        String sql = "DELETE FROM Asiento WHERE ID=" + a.getIdAsiento();
         try {
-            connect = Conexion.conectar();
-            stm = connect.createStatement();
-            stm.execute(sql);
-            eliminar = true;
-        } catch (SQLException e) {
-            System.out.println("Error en la clase AsientoSQL (método eliminar asiento)");
-            e.printStackTrace();
+            sentencia = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM asiento where idAsiento = '" + a.getIdAsiento() + "'";
+            sentencia.executeQuery(sql);
+            ResultSet rs = sentencia.getResultSet();
+            if (rs.next()) {
+                rs.deleteRow();
+            }
+
+        } catch (SQLException ex) {
+            throw new DatosException("Error: " + ex.toString());
         }
-        return eliminar;
     }
-*/
+
 }
