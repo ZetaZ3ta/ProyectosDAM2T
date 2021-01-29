@@ -22,7 +22,7 @@ import m06.uf4.practica.Aplicacio.Model.Asiento;
 public class AsientoSQL {
     
     DriverMySql dms;
-    
+    /*
      public AsientoSQL(DriverMySql c) throws AplicacionException {
         if (c.getConnection() == null)
             throw new AplicacionException("Sense connexió a BBDD");
@@ -121,5 +121,5 @@ public class AsientoSQL {
         }
         return eliminar;
     }
-
+*/
 }

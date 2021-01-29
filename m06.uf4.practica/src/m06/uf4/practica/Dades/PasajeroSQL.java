@@ -18,9 +18,11 @@ import m06.uf4.practica.Aplicacio.Model.Vuelo;
 /**
  *
  * @author IvánJM
- */ /*
+ */ 
 public class PasajeroSQL {
-
+    
+}
+/*
     public boolean registrarPasajero(Pasajero p) {
         boolean registrar = false;
 
