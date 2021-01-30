@@ -94,14 +94,14 @@ public class controlador implements Initializable {
     }
 
     private void cargarAsientos(Vuelo vuelo) {
-        String vueloAsiento = "";
-        System.out.println("Asientos Disponibles");
+        int vueloAsiento;
+        System.out.println("================");
         try {
             arrayAsiento = LogicAsiento.getAsientos();
 
             for (Asiento asiento : arrayAsiento) {
-                vueloAsiento = asiento.getNumVuelo().toString();
-                if (vueloAsiento.equals(vuelo.getNumVuelo())) {
+                vueloAsiento = asiento.getNumVuelo().getNumVuelo();
+                if (vueloAsiento == vuelo.getNumVuelo()) {
                     if (!asiento.getLleno()) {
                         System.out.println(asiento.getIdAsiento());
                     }

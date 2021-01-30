@@ -6,6 +6,7 @@
 package m06.uf4.practica.Dades;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -49,12 +50,10 @@ public class AsientoSQL {
             sentencia.executeQuery("SELECT * FROM asiento");
             ResultSet rs = sentencia.getResultSet();
             while (rs.next()) {
-      
-                Vuelo v = new Vuelo(rs.getInt("numVuelo"), rs.getInt("capacidad"), rs.getDate("FechaHora").toLocalDate());
-              
-               
-                ret.add(new Asiento(rs.getString("idAsiento"),v , rs.getBoolean("Lleno")));
 
+              //  Vuelo v = new Vuelo(rs.getInt("numVuelo"), rs.getInt("capacidad"), rs.("Fecha y Hora"));
+
+                ret.add(new Asiento(rs.getString("idAsiento"), getVuelo(rs.getInt("numVuelo"), con), rs.getBoolean("Lleno")));
             }
 
         } catch (SQLException ex) {
@@ -62,6 +61,37 @@ public class AsientoSQL {
         }
         return ret;
     }
+        
+        public static Vuelo getVuelo(int numVuelo, Connection conn) throws DatosException {
+
+        Vuelo vuelo = null;
+        try {
+            String nomBD = conn.getCatalog();
+            PreparedStatement preparedStatement;
+            String sql = "SELECT * FROM " + nomBD + ".Vuelo  WHERE numVuelo= ? ";
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, numVuelo);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                vuelo = new Vuelo(rs.getInt("numVuelo"), rs.getInt("capacidad"),rs.getDate("FechaHora").toLocalDate());
+            }
+        } catch (SQLException e) {
+           throw new DatosException("Error: " + e.toString());
+        }
+
+        return vuelo;
+
+    }  
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
     public static void actualizarAsiento(Connection con, Asiento a) throws DatosException {
         Statement sentencia;
