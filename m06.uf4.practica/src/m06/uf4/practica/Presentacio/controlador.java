@@ -34,13 +34,16 @@ public class controlador implements Initializable {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
     }
+    Vuelo v;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        String vuelo, asiento;
+        Vuelo v;
+        String asiento;
+        int vuelo;
         cargarVuelo();
-        vuelo = seleccionarVuelo();
-        cargarAsientos(vuelo);
+        v = seleccionarVuelo();
+        cargarAsientos(v);
         asiento = seleccionarAsiento();
     }
 
@@ -55,7 +58,7 @@ public class controlador implements Initializable {
         try {
             arrayVuelo = LogicVuelo.getVuelos();
             for (Vuelo vuelo : arrayVuelo) {
-                vuelo.toString();
+                System.out.println("Vuelo: " + vuelo.getNumVuelo());
             }
         } catch (AplicacionException e) {
             mostrarInfo(e.toString());
@@ -63,22 +66,44 @@ public class controlador implements Initializable {
 
     }
 
-    private String seleccionarVuelo() {
-        String vuelo;
-        System.out.println("Seleccione Vuelo");
-        vuelo = scanner.nextLine();
-        return vuelo;
+    private Vuelo seleccionarVuelo() {
+        int vuelo;
+        Vuelo vuel= new Vuelo();
+        System.out.println("Seleccione un Vuelo");
+        vuelo = scanner.nextInt();
+        try {
+            for (Vuelo v : arrayVuelo) {
+                if (v.getNumVuelo() == vuelo) {
+                    arrayAsiento = LogicAsiento.getAsientos();
+                    if (arrayAsiento.size() < 1) {
+                        for (int i = 0; i < v.getCapacidad(); i++) {
+                            Asiento a = new Asiento("as" + i, v, false);
+                            LogicAsiento.insertarAsiento(a);
+                        }
+                    }
+                    vuel=v;
+                } else {
+                    System.out.println("vuelo no disponible");
+                }
+
+            }
+        } catch (AplicacionException e) {
+            mostrarInfo(e.toString());
+        }
+        return vuel;
     }
 
-    private void cargarAsientos(String vuelo) {
+    private void cargarAsientos(Vuelo vuelo) {
         String vueloAsiento = "";
+        System.out.println("Asientos Disponibles");
         try {
             arrayAsiento = LogicAsiento.getAsientos();
+
             for (Asiento asiento : arrayAsiento) {
                 vueloAsiento = asiento.getNumVuelo().toString();
-                if (vueloAsiento.equals(vuelo)) {
+                if (vueloAsiento.equals(vuelo.getNumVuelo())) {
                     if (!asiento.getLleno()) {
-                        asiento.toString();
+                        System.out.println(asiento.getIdAsiento());
                     }
                 }
             }
@@ -91,11 +116,12 @@ public class controlador implements Initializable {
     private String seleccionarAsiento() {
 
         String asiento;
-        System.out.println("Seleccione Asiento");
+        System.out.println("Seleccione un Asiento");
         asiento = scanner.nextLine();
         return asiento;
     }
-/*
+
+    /*
     public controlador(Vista v, Vuelo vuel, Asiento as, Pasajero p) throws AplicacionException {
         pasajero = p;
         vuelo = vuel;
@@ -105,7 +131,7 @@ public class controlador implements Initializable {
         initView();
     }*/
 
-    /*  public void initView() throws AplicacionException {
+ /*  public void initView() throws AplicacionException {
         cargarRegistros();
 
     }
