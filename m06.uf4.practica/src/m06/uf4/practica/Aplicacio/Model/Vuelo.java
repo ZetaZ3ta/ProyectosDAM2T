@@ -5,7 +5,9 @@
  */
 package m06.uf4.practica.Aplicacio.Model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 /**
  *
@@ -15,9 +17,9 @@ public class Vuelo {
 
     private int numVuelo;
     private int capacidad;
-    private Timestamp fecha_hora;
+    private LocalDate fecha_hora;
 
-    public Vuelo(int numVuelo, int capacidad, Timestamp fecha_hora) {
+    public Vuelo(int numVuelo, int capacidad, LocalDate fecha_hora) {
         this.numVuelo = numVuelo;
         this.capacidad = capacidad;
         this.fecha_hora = fecha_hora;
@@ -57,14 +59,14 @@ public class Vuelo {
     /**
      * @return the fecha_hora
      */
-    public Timestamp getFecha_hora() {
+    public LocalDate getFecha_hora() {
         return fecha_hora;
     }
 
     /**
      * @param fecha_hora the fecha_hora to set
      */
-    public void setFecha_hora(Timestamp fecha_hora) {
+    public void setFecha_hora(LocalDate fecha_hora) {
         this.fecha_hora = fecha_hora;
     }
 

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import m06.uf4.practica.Aplicacio.Model.Asiento;
@@ -32,7 +33,7 @@ public class VueloSQL {
             rs.moveToInsertRow();
             rs.updateInt("numVuelo", v.getNumVuelo());
             rs.updateInt("capacidad", v.getNumVuelo());
-            rs.updateTimestamp("FechaHora", v.getFecha_hora());
+            rs.updateDate("FechaHora", java.sql.Date.valueOf(v.getFecha_hora()));
 
             rs.insertRow();
         } catch (SQLException ex) {
@@ -51,7 +52,7 @@ public class VueloSQL {
             ResultSet rs = sentencia.getResultSet();
             while (rs.next()) {
 
-                ret.add(new Vuelo(rs.getInt("numVuelo"), rs.getInt("capacidad"), rs.getTimestamp("FechaHora")));
+                ret.add(new Vuelo(rs.getInt("numVuelo"), rs.getInt("capacidad"), rs.getDate("FechaHora").toLocalDate()));
 
             }
 
@@ -72,7 +73,7 @@ public class VueloSQL {
             if (rs.next()) {
                 rs.updateInt("numVuelo", v.getNumVuelo());
                 rs.updateInt("capacidad", v.getCapacidad());
-                rs.updateTimestamp("FechaHora", v.getFecha_hora());
+                rs.updateDate("FechaHora", java.sql.Date.valueOf(v.getFecha_hora()));
 
                 rs.updateRow();
             } else {

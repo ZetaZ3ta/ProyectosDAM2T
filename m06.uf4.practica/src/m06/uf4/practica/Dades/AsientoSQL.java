@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import m06.uf4.practica.Aplicacio.Model.Asiento;
 import m06.uf4.practica.Aplicacio.Model.Vuelo;
@@ -38,7 +39,7 @@ public class AsientoSQL {
         }
     }
 
-        public static ArrayList<Asiento> cargarAsiento(Connection con) throws DatosException {
+    public static ArrayList<Asiento> cargarAsiento(Connection con) throws DatosException {
         ArrayList<Asiento> ret = new ArrayList<>();
 
         Statement sentencia;
@@ -48,10 +49,11 @@ public class AsientoSQL {
             sentencia.executeQuery("SELECT * FROM asiento");
             ResultSet rs = sentencia.getResultSet();
             while (rs.next()) {
-
-                Vuelo v = new Vuelo(rs.getInt("numVuelo"), rs.getInt("capacidad"), rs.getTimestamp("FechaHora"));
-
-                ret.add(new Asiento(rs.getString("idAsiento"), v, rs.getBoolean("Lleno")));
+      
+                Vuelo v = new Vuelo(rs.getInt("numVuelo"), rs.getInt("capacidad"), rs.getDate("FechaHora").toLocalDate());
+              
+               
+                ret.add(new Asiento(rs.getString("idAsiento"),v , rs.getBoolean("Lleno")));
 
             }
 
