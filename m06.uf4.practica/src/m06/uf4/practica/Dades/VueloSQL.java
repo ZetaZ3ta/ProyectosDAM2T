@@ -76,7 +76,7 @@ public class VueloSQL {
 
                 rs.updateRow();
             } else {
-                throw new DatosException("El asiento " + v + "no se a encontrado");
+                throw new DatosException("El vuelo " + v + "no se a encontrado");
             }
 
         } catch (SQLException ex) {
