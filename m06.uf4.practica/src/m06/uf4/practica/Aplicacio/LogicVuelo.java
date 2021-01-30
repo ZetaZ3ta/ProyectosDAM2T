@@ -11,7 +11,7 @@ import m06.uf4.practica.Dades.VueloSQL;
  */
 public class LogicVuelo {
 
-    public ArrayList<Vuelo> getVuelos() throws AplicacionException {
+    public static ArrayList<Vuelo> getVuelos() throws AplicacionException {
         try {
             DriverMySql conn;
             ArrayList<Vuelo> ret;

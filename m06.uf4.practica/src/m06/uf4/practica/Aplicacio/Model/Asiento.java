@@ -19,7 +19,7 @@ public class Asiento {
 
     public Asiento(String idAsiento, Vuelo numVuelo, Boolean lleno) {
         this.idAsiento = idAsiento;
-        this.numVuelo = new Vuelo();
+        this.numVuelo =  numVuelo;
         this.lleno = lleno;
     }
 

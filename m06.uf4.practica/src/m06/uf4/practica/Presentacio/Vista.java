@@ -5,63 +5,121 @@
  */
 package m06.uf4.practica.Presentacio;
 
+import java.sql.Timestamp;
 import java.util.Scanner;
+import m06.uf4.practica.Aplicacio.LogicPasajero;
+import m06.uf4.practica.Aplicacio.Model.Asiento;
+import m06.uf4.practica.Aplicacio.Model.Pasajero;
+import m06.uf4.practica.Aplicacio.Model.Vuelo;
 
 /**
  *
  * @author leandroparedes
  */
+/*
 public class Vista {
 
     private String pasajerNom;
     private String pasajeroApellido;
-    private String pasajeroSegundoApellido;
     private String pasajeroDNI;
 
-    private Pasajeromvc pasajero;
+    private int numeroVuelo;
+    private int capacidad;
+    private Timestamp fechahora;
 
-    public Vista(Pasajeromvc b) {
+    private String idAsiento;
+    private boolean lleno;
+
+    private Pasajero pasajero;
+    private Asiento asiento;
+    private Vuelo vuelo;
+
+    public Vista(Pasajero b, Vuelo v, Asiento a) {
 
         this.pasajero = b;
         pasajerNom = "";
         pasajeroApellido = "";
-        pasajeroSegundoApellido = "";
-        pasajeroDNI="";
+        pasajeroDNI = "";
+
+        this.vuelo = v;
+        numeroVuelo = 0;
+        capacidad = 0;
+        fechahora = new Timestamp(System.currentTimeMillis());
+
+        this.asiento = a;
+
+        idAsiento = "";
+        lleno = false;
+
+    }
+
+    public void getVuelo() {
+        boolean salir = false;
+
+        do {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Vuelo");
+            numeroVuelo = scanner.nextInt();
+            
+            scanner = new Scanner(System.in);
+            System.out.println("Datos correctos? (s/n)");
+            String s = scanner.nextLine();
+            
+            if (s.toUpperCase().equals("S")) {
+                salir = true;
+            }
+
+        } while (!salir);
+    }
+
+    public void getAsiento() {
+        boolean salir = false;
+
+        do {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Asiento");
+            idAsiento = scanner.nextLine();
+            
+            scanner = new Scanner(System.in);
+            System.out.println("Datos correctos? (s/n)");
+            String s = scanner.nextLine();
+            
+            if (s.toUpperCase().equals("S")) {
+                salir = true;
+            }
+
+        } while (!salir);
     }
 
     public void getDades() {
-        boolean sortir = false;
+        boolean salir = false;
 
         do {
 
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Nom?");
+            System.out.println("Nombre?");
             pasajerNom = scanner.nextLine();
 
             scanner = new Scanner(System.in);
-            System.out.println("Primer cognom?");
+            System.out.println("Apellidos?");
             pasajeroApellido = scanner.nextLine();
 
             scanner = new Scanner(System.in);
-            System.out.println("Segon cognom?");
-            pasajeroSegundoApellido = scanner.nextLine();
-            
-             scanner = new Scanner(System.in);
             System.out.println("Dni?");
             pasajeroDNI = scanner.nextLine();
 
             scanner = new Scanner(System.in);
-            System.out.println("Dades correctes? (s/n)");
+            System.out.println("Datos correctos? (s/n)");
             String s = scanner.nextLine();
             if (s.toUpperCase().equals("S")) {
-                sortir = true;
+                salir = true;
             }
 
-        } while (!sortir);
+        } while (!salir);
 
     }
 
-    public boolean getSortir() {
+    public boolean getSalir() {
         boolean ret = false;
 
         Scanner scanner = new Scanner(System.in);
@@ -74,45 +132,104 @@ public class Vista {
         return ret;
     }
 
-    public String getNom() {
+    public String getPasajerNom() {
         return pasajerNom;
     }
 
-    public void setNom(String nombre) {
-        this.pasajerNom = nombre;
+    public void setPasajerNom(String pasajerNom) {
+        this.pasajerNom = pasajerNom;
     }
 
-    public String getPrimerApellido() {
+    public String getPasajeroApellido() {
         return pasajeroApellido;
     }
 
-    public void setPrimerApellido(String prApellido) {
-        this.pasajeroApellido = prApellido;
+    public void setPasajeroApellido(String pasajeroApellido) {
+        this.pasajeroApellido = pasajeroApellido;
     }
 
-    public String getSegundoApellido() {
-        return pasajeroSegundoApellido;
+    public int getNumeroVuelo() {
+        return numeroVuelo;
     }
 
-    public void setSegundoApellido(String sgApellido) {
-        this.pasajeroSegundoApellido = sgApellido;
+    public void setNumeroVuelo(int numeroVuelo) {
+        this.numeroVuelo = numeroVuelo;
     }
 
-    public String getPasajeroDNI() {
-        return pasajeroDNI;
+    public int getCapacidad() {
+        return capacidad;
     }
 
-    public void setPasajeroDNI(String pasajeroDNI) {
-        this.pasajeroDNI = pasajeroDNI;
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
     }
-    
 
-    public void muestraDatos() {
+    public Timestamp getFechahora() {
+        return fechahora;
+    }
+
+    public void setFechahora(Timestamp fechahora) {
+        this.fechahora = fechahora;
+    }
+
+    public String getIdAsiento() {
+        return idAsiento;
+    }
+
+    public void setIdAsiento(String idAsiento) {
+        this.idAsiento = idAsiento;
+    }
+
+    public boolean isLleno() {
+        return lleno;
+    }
+
+    public void setLleno(boolean lleno) {
+        this.lleno = lleno;
+    }
+
+    public Pasajero getPasajero() {
+        return pasajero;
+    }
+
+    public void setPasajero(Pasajero pasajero) {
+        this.pasajero = pasajero;
+    }
+
+
+
+    public void setAsiento(Asiento asiento) {
+        this.asiento = asiento;
+    }
+
+
+    public void setVuelo(Vuelo vuelo) {
+        this.vuelo = vuelo;
+    }
+
+    public void muestraVuelo() {
         System.out.println("============================");
-        System.out.println("Nom: " + pasajero.getNom());
-        System.out.println("Primer Apellido: " + pasajero.getPrApellido());
-        System.out.println("Segundo Apellido: " + pasajero.getSgApellido());
-        System.out.println("Dni: " + pasajero.getDni());
+        System.out.println("Vuelos");
+        System.out.println("Numero de vuelo" + vuelo.getNumVuelo());
+        System.out.println("============================");
+    }
+
+    public void muestraAsientosDisponibles() {
+        System.out.println("============================");
+        System.out.println("Asientos disponibles");
+        System.out.println("Numero de asiento" + asiento.getIdAsiento());
+        System.out.println("============================");
+    }
+
+    public void muestraBillete() {
+        System.out.println("============================");
+        System.out.println("Billete" + pasajero.getIDbillete());
+        System.out.println("Nom: " + pasajero.getNombre());
+        System.out.println("Primer Apellido: " + pasajero.getApellido());
+        System.out.println("Dni: " + pasajero.getDNI());
+        System.out.println("Vuelo: " + pasajero.getNumVuelo());
+        System.out.println("Numeor Asiento" + pasajero.getIdAsiento());
         System.out.println("============================");
     }
 }
+*/
