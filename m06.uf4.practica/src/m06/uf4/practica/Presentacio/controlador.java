@@ -95,7 +95,7 @@ public class controlador implements Initializable {
 
     private void cargarAsientos(Vuelo vuelo) {
         String vueloAsiento = "";
-        System.out.println("Asientos Disponibles");
+        System.out.println(" ");
         try {
             arrayAsiento = LogicAsiento.getAsientos();
 
