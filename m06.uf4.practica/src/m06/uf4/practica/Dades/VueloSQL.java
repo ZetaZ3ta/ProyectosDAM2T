@@ -32,7 +32,7 @@ public class VueloSQL {
             rs.moveToInsertRow();
             rs.updateInt("numVuelo", v.getNumVuelo());
             rs.updateInt("capacidad", v.getNumVuelo());
-            rs.updateTimestamp("Fecha y Hora", v.getFecha_hora());
+            rs.updateTimestamp("FechaHora", v.getFecha_hora());
 
             rs.insertRow();
         } catch (SQLException ex) {
@@ -51,7 +51,7 @@ public class VueloSQL {
             ResultSet rs = sentencia.getResultSet();
             while (rs.next()) {
 
-                ret.add(new Vuelo(rs.getInt("numVuelo"), rs.getInt("capacidad"), rs.getTimestamp("Fecha y Hora")));
+                ret.add(new Vuelo(rs.getInt("numVuelo"), rs.getInt("capacidad"), rs.getTimestamp("FechaHora")));
 
             }
 
@@ -72,7 +72,7 @@ public class VueloSQL {
             if (rs.next()) {
                 rs.updateInt("numVuelo", v.getNumVuelo());
                 rs.updateInt("capacidad", v.getCapacidad());
-                rs.updateTimestamp("Fecha y Hora", v.getFecha_hora());
+                rs.updateTimestamp("FechaHora", v.getFecha_hora());
 
                 rs.updateRow();
             } else {

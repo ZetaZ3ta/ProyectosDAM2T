@@ -49,7 +49,7 @@ public class AsientoSQL {
             ResultSet rs = sentencia.getResultSet();
             while (rs.next()) {
 
-                Vuelo v = new Vuelo(rs.getInt("numVuelo"), rs.getInt("capacidad"), rs.getTimestamp("Fecha y Hora"));
+                Vuelo v = new Vuelo(rs.getInt("numVuelo"), rs.getInt("capacidad"), rs.getTimestamp("FechaHora"));
 
                 ret.add(new Asiento(rs.getString("idAsiento"), v, rs.getBoolean("Lleno")));
 

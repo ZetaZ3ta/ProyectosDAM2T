@@ -54,7 +54,7 @@ public class PasajeroSQL {
             ResultSet rs = sentencia.getResultSet();
             while (rs.next()) {
 
-                Vuelo v = new Vuelo(rs.getInt("numVuelo"), rs.getInt("capacidad"), rs.getTimestamp("Fecha y Hora"));
+                Vuelo v = new Vuelo(rs.getInt("numVuelo"), rs.getInt("capacidad"), rs.getTimestamp("FechaHora"));
                 Asiento a = new Asiento(rs.getString("idAsiento"), v, rs.getBoolean("Lleno"));
                 ret.add(new Pasajero(rs.getString("DNI"), rs.getString("Nombre"), rs.getString("Apellido"), v, a, rs.getString("IDbillete")));
 
