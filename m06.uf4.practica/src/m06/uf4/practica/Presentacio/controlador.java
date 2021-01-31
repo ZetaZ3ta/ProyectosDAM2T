@@ -72,7 +72,7 @@ public class controlador implements Initializable {
     private void verificacionAsientoDisponible(Vuelo v) throws AplicacionException {
 
         boolean disponibilidad = false;
-        arrayAsiento=LogicAsiento.getAsientos();
+        arrayAsiento=LogicAsiento.getAsientos(v.getNumVuelo());
         for (Asiento asiento : arrayAsiento) {
             if (asiento.getNumVuelo().getNumVuelo() == v.getNumVuelo()) {
                 if (!asiento.getLleno()) {
@@ -163,12 +163,12 @@ public class controlador implements Initializable {
         try {
             for (Vuelo v : arrayVuelo) {
                 if (v.getNumVuelo() == vuelo) {
-                    arrayAsiento = LogicAsiento.getAsientos();
+                    arrayAsiento = LogicAsiento.getAsientos(vuelo);
                     if (arrayAsiento.size() < 1) {
                         generarAsientos(v);
                     }
                     vuel = v;
-                } 
+                }
             }
         } catch (AplicacionException e) {
             mostrarInfo(e.toString());
@@ -179,7 +179,7 @@ public class controlador implements Initializable {
     private void generarAsientos(Vuelo v) throws AplicacionException {
 
         for (int i = 0; i < v.getCapacidad(); i++) {
-            Asiento a = new Asiento("as" + i, v, false);
+            Asiento a = new Asiento(v.getNumVuelo()+"as" + i, v, false);
             LogicAsiento.insertarAsiento(a);
         }
     }
@@ -188,7 +188,7 @@ public class controlador implements Initializable {
         int vueloAsiento;
         System.out.println("================");
         try {
-            arrayAsiento = LogicAsiento.getAsientos();
+            arrayAsiento = LogicAsiento.getAsientos(vuelo.getNumVuelo());
 
             for (Asiento asiento : arrayAsiento) {
                 vueloAsiento = asiento.getNumVuelo().getNumVuelo();

@@ -11,13 +11,13 @@ import m06.uf4.practica.Dades.DatosException;
  */
 public class LogicAsiento {
 
-    public static ArrayList<Asiento> getAsientos() throws AplicacionException {
+    public static ArrayList<Asiento> getAsientos(int numVuelo) throws AplicacionException {
         try {
             DriverMySql conn;
             ArrayList<Asiento> ret;
 
             conn = DriverMySql.getInstance();
-            ret = AsientoSQL.cargarAsiento(conn.getConnection());
+            ret = AsientoSQL.cargarAsiento(conn.getConnection(),numVuelo);
 
             return ret;
         } catch (DatosException ex) {

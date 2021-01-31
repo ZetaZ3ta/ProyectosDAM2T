@@ -40,14 +40,14 @@ public class AsientoSQL {
         }
     }
 
-    public static ArrayList<Asiento> cargarAsiento(Connection con) throws DatosException {
+    public static ArrayList<Asiento> cargarAsiento(Connection con, int NumVuelo) throws DatosException {
         ArrayList<Asiento> ret = new ArrayList<>();
 
         Statement sentencia;
 
         try {
             sentencia = con.createStatement();
-            sentencia.executeQuery("SELECT * FROM asiento");
+            sentencia.executeQuery("SELECT * FROM asiento where numVuelo ="+ NumVuelo);
             ResultSet rs = sentencia.getResultSet();
             while (rs.next()) {
 
@@ -83,15 +83,6 @@ public class AsientoSQL {
         return vuelo;
 
     }  
-        
-        
-        
-        
-        
-        
-        
-        
-        
 
     public static void actualizarAsiento(Connection con, Asiento a) throws DatosException {
         Statement sentencia;
