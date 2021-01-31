@@ -37,9 +37,6 @@ public class controlador {
         Pasajero pas;
         do {
             try {
-
-                int vuelo;
-           
                
                 cargarVuelo();
                 v = seleccionarVuelo();
