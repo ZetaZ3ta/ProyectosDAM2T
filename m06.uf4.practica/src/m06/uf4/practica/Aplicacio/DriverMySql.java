@@ -9,6 +9,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ *
+ * @author leandroparedes
+ */
 public class DriverMySql {
 
     private static volatile DriverMySql instance = null;
@@ -19,6 +23,11 @@ public class DriverMySql {
 
     private Connection conn = null;
 
+    /**
+     *
+     * @return
+     * @throws AplicacionException
+     */
     public static DriverMySql getInstance() throws AplicacionException {
         if (instance == null) {
 
@@ -32,6 +41,11 @@ public class DriverMySql {
         return instance;
     }
 
+    /**
+     *
+     * @return
+     * @throws AplicacionException
+     */
     public Connection getConnection() throws AplicacionException {
         Connection ret = null;
 
@@ -56,6 +70,10 @@ public class DriverMySql {
         return conn;
     }
 
+    /**
+     *
+     * @throws AplicacionException
+     */
     public void closeConnection() throws AplicacionException {
         try {
             this.conn.close();

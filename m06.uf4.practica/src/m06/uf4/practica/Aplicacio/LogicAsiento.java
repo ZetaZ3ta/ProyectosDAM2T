@@ -11,6 +11,12 @@ import m06.uf4.practica.Dades.DatosException;
  */
 public class LogicAsiento {
 
+    /**
+     *
+     * @param numVuelo
+     * @return
+     * @throws AplicacionException
+     */
     public static ArrayList<Asiento> getAsientos(int numVuelo) throws AplicacionException {
         try {
             DriverMySql conn;
@@ -26,7 +32,11 @@ public class LogicAsiento {
 
     }
 
-
+    /**
+     *
+     * @param a
+     * @throws AplicacionException
+     */
     public static void insertarAsiento(Asiento a) throws AplicacionException {
         try {
             DriverMySql conn;
@@ -38,6 +48,11 @@ public class LogicAsiento {
         }
     }
 
+    /**
+     *
+     * @param a
+     * @throws AplicacionException
+     */
     public static void eliminarAsiento(Asiento a) throws AplicacionException {
         try {
             DriverMySql conn;
@@ -49,6 +64,11 @@ public class LogicAsiento {
         }
     }
 
+    /**
+     *
+     * @param a
+     * @throws AplicacionException
+     */
     public static void modificarAsiento(Asiento a) throws AplicacionException {
         try {
             DriverMySql conn;

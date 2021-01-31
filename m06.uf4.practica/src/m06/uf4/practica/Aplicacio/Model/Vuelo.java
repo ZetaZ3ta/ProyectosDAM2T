@@ -19,12 +19,21 @@ public class Vuelo {
     private int capacidad;
     private LocalDate fecha_hora;
 
+    /**
+     *
+     * @param numVuelo
+     * @param capacidad
+     * @param fecha_hora
+     */
     public Vuelo(int numVuelo, int capacidad, LocalDate fecha_hora) {
         this.numVuelo = numVuelo;
         this.capacidad = capacidad;
         this.fecha_hora = fecha_hora;
     }
 
+    /**
+     *
+     */
     public Vuelo() {
     }
 

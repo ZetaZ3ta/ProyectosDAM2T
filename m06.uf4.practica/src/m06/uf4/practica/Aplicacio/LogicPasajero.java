@@ -11,6 +11,11 @@ import m06.uf4.practica.Dades.PasajeroSQL;
  */
 public class LogicPasajero {
 
+    /**
+     *
+     * @return
+     * @throws AplicacionException
+     */
     public static ArrayList<Pasajero> getPasajeros() throws AplicacionException {
         try {
             DriverMySql conn;
@@ -26,6 +31,11 @@ public class LogicPasajero {
 
     }
 
+    /**
+     *
+     * @param p
+     * @throws AplicacionException
+     */
     public static void insertarPasajero(Pasajero p) throws AplicacionException {
         try {
             DriverMySql conn;
@@ -37,6 +47,11 @@ public class LogicPasajero {
         }
     }
 
+    /**
+     *
+     * @param p
+     * @throws AplicacionException
+     */
     public static void eliminarPasajero(Pasajero p) throws AplicacionException {
         try {
             DriverMySql conn;
@@ -48,6 +63,11 @@ public class LogicPasajero {
         }
     }
 
+    /**
+     *
+     * @param p
+     * @throws AplicacionException
+     */
     public static void modificarPasajero(Pasajero p) throws AplicacionException {
         try {
             DriverMySql conn;

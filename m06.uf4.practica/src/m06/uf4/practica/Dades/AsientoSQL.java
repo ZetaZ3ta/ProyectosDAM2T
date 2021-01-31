@@ -21,6 +21,12 @@ import m06.uf4.practica.Aplicacio.Model.Vuelo;
  */
 public class AsientoSQL {
 
+    /**
+     *
+     * @param con
+     * @param a
+     * @throws DatosException
+     */
     public static void insertarAsiento(Connection con, Asiento a) throws DatosException {
         Statement sentencia;
         int id;
@@ -40,6 +46,13 @@ public class AsientoSQL {
         }
     }
 
+    /**
+     *
+     * @param con
+     * @param NumVuelo
+     * @return
+     * @throws DatosException
+     */
     public static ArrayList<Asiento> cargarAsiento(Connection con, int NumVuelo) throws DatosException {
         ArrayList<Asiento> ret = new ArrayList<>();
 
@@ -62,7 +75,14 @@ public class AsientoSQL {
         return ret;
     }
         
-        public static Vuelo getVuelo(int numVuelo, Connection conn) throws DatosException {
+    /**
+     *
+     * @param numVuelo
+     * @param conn
+     * @return
+     * @throws DatosException
+     */
+    public static Vuelo getVuelo(int numVuelo, Connection conn) throws DatosException {
 
         Vuelo vuelo = null;
         try {
@@ -84,6 +104,12 @@ public class AsientoSQL {
 
     }  
 
+    /**
+     *
+     * @param con
+     * @param a
+     * @throws DatosException
+     */
     public static void actualizarAsiento(Connection con, Asiento a) throws DatosException {
         Statement sentencia;
 
@@ -107,6 +133,12 @@ public class AsientoSQL {
         }
     }
 
+    /**
+     *
+     * @param con
+     * @param a
+     * @throws DatosException
+     */
     public static void eliminarAsiento(Connection con, Asiento a) throws DatosException {
         Statement sentencia;
 

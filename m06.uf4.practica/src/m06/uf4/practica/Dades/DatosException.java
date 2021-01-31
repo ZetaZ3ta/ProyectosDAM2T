@@ -11,6 +11,10 @@ package m06.uf4.practica.Dades;
  */
 public class DatosException extends Exception {
 
+    /**
+     *
+     * @param message
+     */
     public DatosException(String message) {
         super(message);
     }

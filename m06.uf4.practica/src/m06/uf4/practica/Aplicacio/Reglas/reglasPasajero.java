@@ -9,7 +9,12 @@ import m06.uf4.practica.Aplicacio.AplicacionException;
  */
 public class reglasPasajero {
 
-               public static void DNI(String Dni) throws AplicacionException {
+    /**
+     *
+     * @param Dni
+     * @throws AplicacionException
+     */
+    public static void DNI(String Dni) throws AplicacionException {
             String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
             Pattern regla = Pattern.compile("^[0-9]{8}[" + letras + "]$");
             if (regla.matcher(Dni).find()) {

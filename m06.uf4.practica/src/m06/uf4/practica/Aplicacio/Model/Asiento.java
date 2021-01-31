@@ -17,35 +17,68 @@ public class Asiento {
     private Vuelo numVuelo;
     private Boolean lleno;
 
+    /**
+     *
+     * @param idAsiento
+     * @param numVuelo
+     * @param lleno
+     */
     public Asiento(String idAsiento, Vuelo numVuelo, Boolean lleno) {
         this.idAsiento = idAsiento;
         this.numVuelo =  numVuelo;
         this.lleno = lleno;
     }
 
+    /**
+     *
+     */
     public Asiento() {
     }
 
+    /**
+     *
+     * @return
+     */
     public String getIdAsiento() {
         return idAsiento;
     }
 
+    /**
+     *
+     * @param idAsiento
+     */
     public void setIdAsiento(String idAsiento) {
         this.idAsiento = idAsiento;
     }
 
+    /**
+     *
+     * @return
+     */
     public Vuelo getNumVuelo() {
         return numVuelo;
     }
 
+    /**
+     *
+     * @param numVuelo
+     */
     public void setNumVuelo(Vuelo numVuelo) {
         this.numVuelo = numVuelo;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getLleno() {
         return lleno;
     }
 
+    /**
+     *
+     * @param lleno
+     */
     public void setLleno(boolean lleno) {
         this.lleno = lleno;
     }

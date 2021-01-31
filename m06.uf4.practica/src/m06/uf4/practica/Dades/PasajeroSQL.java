@@ -21,6 +21,12 @@ import m06.uf4.practica.Aplicacio.Model.Vuelo;
  */
 public class PasajeroSQL {
 
+    /**
+     *
+     * @param con
+     * @param p
+     * @throws DatosException
+     */
     public static void insertarPasajero(Connection con, Pasajero p) throws DatosException {
         Statement sentencia;
         int id;
@@ -43,6 +49,12 @@ public class PasajeroSQL {
         }
     }
 
+    /**
+     *
+     * @param con
+     * @return
+     * @throws DatosException
+     */
     public static ArrayList<Pasajero> cargarPasajero(Connection con) throws DatosException {
         ArrayList<Pasajero> ret = new ArrayList<>();
 
@@ -66,6 +78,12 @@ public class PasajeroSQL {
         return ret;
     }
 
+    /**
+     *
+     * @param con
+     * @param p
+     * @throws DatosException
+     */
     public static void actualizarPasajero(Connection con, Pasajero p) throws DatosException {
         Statement sentencia;
 
@@ -92,6 +110,12 @@ public class PasajeroSQL {
         }
     }
 
+    /**
+     *
+     * @param con
+     * @param p
+     * @throws DatosException
+     */
     public static void eliminarPasajero(Connection con, Pasajero p) throws DatosException {
         Statement sentencia;
 

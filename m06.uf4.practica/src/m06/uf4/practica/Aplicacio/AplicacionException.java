@@ -11,6 +11,10 @@ package m06.uf4.practica.Aplicacio;
  */
 public class AplicacionException extends Exception {
 
+    /**
+     *
+     * @param message
+     */
     public AplicacionException(String message) {
         super(message);
     }

@@ -11,6 +11,11 @@ import m06.uf4.practica.Dades.VueloSQL;
  */
 public class LogicVuelo {
 
+    /**
+     *
+     * @return
+     * @throws AplicacionException
+     */
     public static ArrayList<Vuelo> getVuelos() throws AplicacionException {
         try {
             DriverMySql conn;
@@ -25,6 +30,11 @@ public class LogicVuelo {
         }
     }
 
+    /**
+     *
+     * @param v
+     * @throws AplicacionException
+     */
     public static void insertarVuelo(Vuelo v) throws AplicacionException {
         try {
             DriverMySql conn;
@@ -36,6 +46,11 @@ public class LogicVuelo {
         }
     }
 
+    /**
+     *
+     * @param v
+     * @throws AplicacionException
+     */
     public static void eliminarVuelo(Vuelo v) throws AplicacionException {
         try {
             DriverMySql conn;
@@ -47,6 +62,11 @@ public class LogicVuelo {
         }
     }
 
+    /**
+     *
+     * @param v
+     * @throws AplicacionException
+     */
     public static void modificarVuelo(Vuelo v) throws AplicacionException {
         try {
             DriverMySql conn;

@@ -25,6 +25,10 @@ public class controlador {
 
     static Scanner scanner = new Scanner(System.in);
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         boolean acabarTurno = false;
         String StrAcabarTurno;

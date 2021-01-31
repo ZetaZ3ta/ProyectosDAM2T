@@ -18,6 +18,15 @@ public class Pasajero {
     private Asiento idAsiento;
     private String IDbillete;
 
+    /**
+     *
+     * @param DNI
+     * @param nombre
+     * @param apellido
+     * @param numVuelo
+     * @param idAsiento
+     * @param IDbillete
+     */
     public Pasajero(String DNI, String nombre, String apellido, Vuelo numVuelo, Asiento idAsiento, String IDbillete) {
         this.DNI = DNI;
         this.nombre = nombre;
@@ -27,59 +36,116 @@ public class Pasajero {
         this.IDbillete = IDbillete;
     }
 
+    /**
+     *
+     * @param DNI
+     * @param nombre
+     * @param apellido
+     */
     public Pasajero(String DNI, String nombre, String apellido) {
         this.DNI = DNI;
         this.nombre = nombre;
         this.apellido = apellido;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getIDbillete() {
         return IDbillete;
     }
 
+    /**
+     *
+     * @param IDbillete
+     */
     public void setIDbillete(String IDbillete) {
         this.IDbillete = IDbillete;
     }
 
+    /**
+     *
+     */
     public Pasajero() {
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDNI() {
         return DNI;
     }
 
+    /**
+     *
+     * @param DNI
+     */
     public void setDNI(String DNI) {
         this.DNI = DNI;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getApellido() {
         return apellido;
     }
 
+    /**
+     *
+     * @param apellido
+     */
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
 
+    /**
+     *
+     * @return
+     */
     public Vuelo getNumVuelo() {
         return numVuelo;
     }
 
+    /**
+     *
+     * @param numVuelo
+     */
     public void setNumVuelo(Vuelo numVuelo) {
         this.numVuelo = numVuelo;
     }
 
+    /**
+     *
+     * @return
+     */
     public Asiento getIdAsiento() {
         return idAsiento;
     }
 
+    /**
+     *
+     * @param idAsiento
+     */
     public void setIdAsiento(Asiento idAsiento) {
         this.idAsiento = idAsiento;
     }
