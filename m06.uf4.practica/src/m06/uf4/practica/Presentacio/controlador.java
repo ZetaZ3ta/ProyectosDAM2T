@@ -72,7 +72,7 @@ public class controlador implements Initializable {
     private void verificacionAsientoDisponible(Vuelo v) throws AplicacionException {
 
         boolean disponibilidad = false;
-        arrayAsiento = LogicAsiento.getAsientos();
+        arrayAsiento=LogicAsiento.getAsientos();
         for (Asiento asiento : arrayAsiento) {
             if (asiento.getNumVuelo().getNumVuelo() == v.getNumVuelo()) {
                 if (!asiento.getLleno()) {
@@ -158,18 +158,17 @@ public class controlador implements Initializable {
     private Vuelo seleccionarVuelo() {
         int vuelo;
         Vuelo vuel = new Vuelo();
-
         System.out.println("Seleccione un Vuelo");
         vuelo = scanner.nextInt();
         try {
             for (Vuelo v : arrayVuelo) {
                 if (v.getNumVuelo() == vuelo) {
                     arrayAsiento = LogicAsiento.getAsientos();
-                    if (arrayAsiento < 1) {
+                    if (arrayAsiento.size() < 1) {
                         generarAsientos(v);
                     }
                     vuel = v;
-                }
+                } 
             }
         } catch (AplicacionException e) {
             mostrarInfo(e.toString());
