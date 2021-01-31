@@ -5,9 +5,7 @@
  */
 package m06.uf4.practica.Presentacio;
 
-import java.sql.Timestamp;
 import java.util.Scanner;
-import m06.uf4.practica.Aplicacio.LogicPasajero;
 import m06.uf4.practica.Aplicacio.Model.Asiento;
 import m06.uf4.practica.Aplicacio.Model.Pasajero;
 import m06.uf4.practica.Aplicacio.Model.Vuelo;
@@ -16,22 +14,57 @@ import m06.uf4.practica.Aplicacio.Model.Vuelo;
  *
  * @author leandroparedes
  */
-/*
+
 public class Vista {
 
     private String pasajerNom;
     private String pasajeroApellido;
     private String pasajeroDNI;
 
-    private int numeroVuelo;
-    private int capacidad;
-    private Timestamp fechahora;
-
-    private String idAsiento;
-    private boolean lleno;
+  
 
     private Pasajero pasajero;
     private Asiento asiento;
+
+    public String getPasajerNom() {
+        return pasajerNom;
+    }
+
+    public void setPasajerNom(String pasajerNom) {
+        this.pasajerNom = pasajerNom;
+    }
+
+    public String getPasajeroApellido() {
+        return pasajeroApellido;
+    }
+
+    public void setPasajeroApellido(String pasajeroApellido) {
+        this.pasajeroApellido = pasajeroApellido;
+    }
+
+    public String getPasajeroDNI() {
+        return pasajeroDNI;
+    }
+
+    public void setPasajeroDNI(String pasajeroDNI) {
+        this.pasajeroDNI = pasajeroDNI;
+    }
+
+    public Pasajero getPasajero() {
+        return pasajero;
+    }
+
+    public void setPasajero(Pasajero pasajero) {
+        this.pasajero = pasajero;
+    }
+
+    public Asiento getAsiento() {
+        return asiento;
+    }
+
+    public void setAsiento(Asiento asiento) {
+        this.asiento = asiento;
+    }
     private Vuelo vuelo;
 
     public Vista(Pasajero b, Vuelo v, Asiento a) {
@@ -41,19 +74,9 @@ public class Vista {
         pasajeroApellido = "";
         pasajeroDNI = "";
 
-        this.vuelo = v;
-        numeroVuelo = 0;
-        capacidad = 0;
-        fechahora = new Timestamp(System.currentTimeMillis());
-
-        this.asiento = a;
-
-        idAsiento = "";
-        lleno = false;
-
     }
 
-    public void getVuelo() {
+    /*public void getVuelo() {
         boolean salir = false;
 
         do {
@@ -89,7 +112,7 @@ public class Vista {
             }
 
         } while (!salir);
-    }
+    }*/
 
     public void getDades() {
         boolean salir = false;
@@ -132,76 +155,7 @@ public class Vista {
         return ret;
     }
 
-    public String getPasajerNom() {
-        return pasajerNom;
-    }
-
-    public void setPasajerNom(String pasajerNom) {
-        this.pasajerNom = pasajerNom;
-    }
-
-    public String getPasajeroApellido() {
-        return pasajeroApellido;
-    }
-
-    public void setPasajeroApellido(String pasajeroApellido) {
-        this.pasajeroApellido = pasajeroApellido;
-    }
-
-    public int getNumeroVuelo() {
-        return numeroVuelo;
-    }
-
-    public void setNumeroVuelo(int numeroVuelo) {
-        this.numeroVuelo = numeroVuelo;
-    }
-
-    public int getCapacidad() {
-        return capacidad;
-    }
-
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
-    }
-
-    public Timestamp getFechahora() {
-        return fechahora;
-    }
-
-    public void setFechahora(Timestamp fechahora) {
-        this.fechahora = fechahora;
-    }
-
-    public String getIdAsiento() {
-        return idAsiento;
-    }
-
-    public void setIdAsiento(String idAsiento) {
-        this.idAsiento = idAsiento;
-    }
-
-    public boolean isLleno() {
-        return lleno;
-    }
-
-    public void setLleno(boolean lleno) {
-        this.lleno = lleno;
-    }
-
-    public Pasajero getPasajero() {
-        return pasajero;
-    }
-
-    public void setPasajero(Pasajero pasajero) {
-        this.pasajero = pasajero;
-    }
-
-
-
-    public void setAsiento(Asiento asiento) {
-        this.asiento = asiento;
-    }
-
+    
 
     public void setVuelo(Vuelo vuelo) {
         this.vuelo = vuelo;
@@ -232,4 +186,3 @@ public class Vista {
         System.out.println("============================");
     }
 }
-*/

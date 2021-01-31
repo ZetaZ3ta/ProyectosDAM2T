@@ -10,6 +10,7 @@ package m06.uf4.practica.Aplicacio.Model;
  * @author IvánJM
  */
 public class Pasajero {
+
     private String DNI;
     private String nombre;
     private String apellido;
@@ -23,7 +24,13 @@ public class Pasajero {
         this.apellido = apellido;
         this.numVuelo = numVuelo;
         this.idAsiento = idAsiento;
-        this.IDbillete =  IDbillete;
+        this.IDbillete = IDbillete;
+    }
+
+    public Pasajero(String DNI, String nombre, String apellido) {
+        this.DNI = DNI;
+        this.nombre = nombre;
+        this.apellido = apellido;
     }
 
     public String getIDbillete() {
@@ -81,7 +88,5 @@ public class Pasajero {
     public String toString() {
         return "Pasajero{" + "DNI=" + DNI + ", nombre=" + nombre + ", apellido=" + apellido + ", numVuelo=" + numVuelo + ", idAsiento=" + idAsiento + '}';
     }
-    
-    
-    
+
 }

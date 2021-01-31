@@ -11,8 +11,6 @@ import m06.uf4.practica.Dades.DatosException;
  */
 public class LogicAsiento {
 
-    
-    
     public static ArrayList<Asiento> getAsientos() throws AplicacionException {
         try {
             DriverMySql conn;
@@ -27,26 +25,7 @@ public class LogicAsiento {
         }
 
     }
-    
-    public static ArrayList<Asiento> getAsientDisponible() throws AplicacionException{
-           try {
-            DriverMySql conn;
-            ArrayList<Asiento> ret;
-            conn = DriverMySql.getInstance();
-            ret = AsientoSQL.cargarAsiento(conn.getConnection());
-            
-               for (Asiento asiento : ret) {
-                   if (!asiento.getLleno()) {
-                       System.out.println("Asiento" + asiento.getIdAsiento() );
-                   }
-               }
 
-            return ret;
-        } catch (DatosException ex) {
-            throw new AplicacionException("Error cargando asientos!");
-        }
-    
-    }
 
     public static void insertarAsiento(Asiento a) throws AplicacionException {
         try {
@@ -80,5 +59,5 @@ public class LogicAsiento {
             throw new AplicacionException("Error modificando asientos!");
         }
     }
-    
+
 }

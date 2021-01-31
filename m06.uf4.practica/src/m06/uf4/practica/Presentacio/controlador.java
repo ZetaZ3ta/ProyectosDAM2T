@@ -6,21 +6,17 @@
 package m06.uf4.practica.Presentacio;
 
 import java.net.URL;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import m06.uf4.practica.Aplicacio.*;
 import m06.uf4.practica.Aplicacio.Model.*;
+import m06.uf4.practica.Aplicacio.Reglas.reglasPasajero;
 
 /**
  *
@@ -34,18 +30,6 @@ public class controlador implements Initializable {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
     }
-    Vuelo v;
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        Vuelo v;
-        String asiento;
-        int vuelo;
-        cargarVuelo();
-        v = seleccionarVuelo();
-        cargarAsientos(v);
-        asiento = seleccionarAsiento();
-    }
 
     ArrayList<Vuelo> arrayVuelo;
     ArrayList<Pasajero> arrayPasajeros;
@@ -54,43 +38,151 @@ public class controlador implements Initializable {
     DriverMySql conn;
     Scanner scanner = new Scanner(System.in);
 
+    @Override
+
+    public void initialize(URL url, ResourceBundle rb) {
+        boolean acabarTurno = false;
+        String StrAcabarTurno;
+        Vuelo v;
+        Asiento as;
+        Pasajero pas;
+        do {
+            try {
+
+                int vuelo;
+                cargarVuelo();
+                v = seleccionarVuelo();
+
+                verificacionAsientoDisponible(v);
+                cargarAsientos(v);
+                as = seleccionarAsiento();
+                pas = datosPasajero();
+                crearBillete(v, as, pas);
+
+                System.out.println("Ha acabado el turno ?");
+                StrAcabarTurno = scanner.nextLine().toLowerCase();
+                acabarTurno = acabar(StrAcabarTurno);
+            } catch (AplicacionException ex) {
+                System.out.println(ex.toString());
+            }
+
+        } while (!acabarTurno);
+    }
+
+    private void verificacionAsientoDisponible(Vuelo v) throws AplicacionException {
+
+        boolean disponibilidad = false;
+        arrayAsiento = LogicAsiento.getAsientos();
+        for (Asiento asiento : arrayAsiento) {
+            if (asiento.getNumVuelo().getNumVuelo() == v.getNumVuelo()) {
+                if (!asiento.getLleno()) {
+                    disponibilidad = true;
+                }
+            }
+        }
+        if (!disponibilidad) {
+            throw new AplicacionException("No hay asientos Disponibles");
+        }
+
+    }
+
+    private void crearBillete(Vuelo v, Asiento as, Pasajero pas) {
+        try {
+
+            String IDbillete = v.getCapacidad() + as.getIdAsiento() + pas.getApellido().substring(0, 2);
+            System.out.println("================");
+            System.out.println("Su billete se ha creado correctamente");
+            as = new Asiento(as.getIdAsiento(), v, true);
+            Pasajero pasajero = new Pasajero(pas.getDNI(), pas.getNombre(), pas.getApellido(), v, as, IDbillete);
+            LogicPasajero.insertarPasajero(pasajero);
+            LogicAsiento.modificarAsiento(as);
+
+            System.out.println(pasajero.getIDbillete() + "\n" + pasajero.getDNI() + "\n" + pasajero.getApellido());
+
+            System.out.println(as.toString());
+        } catch (AplicacionException e) {
+            mostrarInfo(e.toString());
+        }
+    }
+
     private void cargarVuelo() {
+        System.out.println("================");
         try {
             arrayVuelo = LogicVuelo.getVuelos();
             for (Vuelo vuelo : arrayVuelo) {
                 System.out.println("Vuelo: " + vuelo.getNumVuelo());
             }
+            System.out.println("================");
         } catch (AplicacionException e) {
             mostrarInfo(e.toString());
         }
 
     }
 
+    private Pasajero datosPasajero() {
+        String nombre = "", apellido = "", dni = "", respuesta;
+        boolean datosCorrectos = false;
+
+        do {
+            try {
+
+                System.out.println("================");
+                System.out.println("Datos del pasajer");
+                System.out.println("Nombre?");
+                nombre = scanner.nextLine();
+                System.out.println("Apellido?");
+                apellido = scanner.nextLine();
+                System.out.println("Dni?");
+                dni = scanner.nextLine();
+                reglasPasajero.DNI(dni);
+                System.out.println("los datos son correctoas?");
+                System.out.println("s/n?");
+                respuesta = scanner.nextLine().toLowerCase();
+                datosCorrectos = acabar(respuesta);
+            } catch (AplicacionException e) {
+                mostrarInfo(e.toString());
+            }
+
+        } while (!datosCorrectos);
+        Pasajero pas = new Pasajero(dni, nombre, apellido);
+        return pas;
+    }
+
+    private boolean acabar(String respuesta) {
+        if (respuesta.equals("s")) {
+            return true;
+        }
+        return false;
+    }
+
     private Vuelo seleccionarVuelo() {
         int vuelo;
-        Vuelo vuel= new Vuelo();
+        Vuelo vuel = new Vuelo();
+
         System.out.println("Seleccione un Vuelo");
         vuelo = scanner.nextInt();
         try {
             for (Vuelo v : arrayVuelo) {
                 if (v.getNumVuelo() == vuelo) {
                     arrayAsiento = LogicAsiento.getAsientos();
-                    if (arrayAsiento.size() < 1) {
-                        for (int i = 0; i < v.getCapacidad(); i++) {
-                            Asiento a = new Asiento("as" + i, v, false);
-                            LogicAsiento.insertarAsiento(a);
-                        }
+                    if (arrayAsiento < 1) {
+                        generarAsientos(v);
                     }
-                    vuel=v;
-                } else {
-                    System.out.println("vuelo no disponible");
+                    vuel = v;
                 }
-
             }
         } catch (AplicacionException e) {
             mostrarInfo(e.toString());
         }
         return vuel;
+    }
+
+    private void generarAsientos(Vuelo v) throws AplicacionException {
+
+        for (int i = 0; i < v.getCapacidad(); i++) {
+            Asiento a = new Asiento("as" + i, v, false);
+            LogicAsiento.insertarAsiento(a);
+        }
     }
 
     private void cargarAsientos(Vuelo vuelo) {
@@ -107,84 +199,36 @@ public class controlador implements Initializable {
                     }
                 }
             }
+            System.out.println("================");
 
         } catch (AplicacionException e) {
             mostrarInfo(e.toString());
         }
     }
 
-    private String seleccionarAsiento() {
+    private Asiento seleccionarAsiento() {
 
-        String asiento;
-        System.out.println("Seleccione un Asiento");
-        asiento = scanner.nextLine();
-        return asiento;
-    }
-
-    /*
-    public controlador(Vista v, Vuelo vuel, Asiento as, Pasajero p) throws AplicacionException {
-        pasajero = p;
-        vuelo = vuel;
-        asiento = as;
-        vista = v;
-
-        initView();
-    }*/
-
- /*  public void initView() throws AplicacionException {
-        cargarRegistros();
-
-    }
-
-    public void initController() throws AplicacionException {
-
-        boolean acabado = false;
-
+        boolean asientoDisponible = false;
+        scanner.nextLine();
+        String Strasiento;
+        Asiento as = new Asiento();
         do {
-            vista.muestraVuelo();
-            cargarVuelos();
 
-            vista.muestraAsientosDisponibles();
+            System.out.println("Seleccione un Asiento");
+            Strasiento = scanner.nextLine();
+            for (Asiento asiento : arrayAsiento) {
+                if (asiento.getIdAsiento().equals(Strasiento)) {
+                    System.out.println("Asiento Seleccionado Correctamente ");
+                    as = asiento;
+                    asientoDisponible = true;
+                }// throw new AplicacionException("Asiento no existe");
 
-            cargarRegistros();
-            vista.getDades();
-            guardarRegistro();
-            acabado = vista.getSalir();
-        } while (!acabado);
+            }
+        } while (!asientoDisponible);
+
+        return as;
     }
 
-    private void cargarVuelos() throws AplicacionException {
-        vista.setVuelo(vuelo);
-    }
-
-
-    /*recull del pasajero i actualitza la vista
-    private void cargarRegistros() throws AplicacionException {
-        vuelo.getVuelos();
-        vista.setNom(pasajero.getNombre());
-        vista.setPrimerApellido(pasajero.getPrApellido());
-        vista.setSegundoApellido(pasajero.getSgApellido());
-        vista.setPasajeroDNI(pasajero.getDni());
-    }
-
-    /*recull de la vista i desa al pasajero
-    private void guardarRegistro() {
-        pasajero.setNom(vista.getNom());
-        pasajero.setPrApellido(vista.getPrimerApellido());
-        pasajero.setSgApellido(vista.getSegundoApellido());
-        pasajero.setDni(vista.getPasajeroDNI());
-    }
-
-    public static void main(String[] args) throws AplicacionException {
-        Vuelo vuelo = new Vuelo(0, 0, Timestamp.from(Instant.MIN));
-        Asiento asiento = new Asiento("", vuelo, Boolean.TRUE);
-        Pasajero pasajero = new Pasajero("", "", "", vuelo, asiento, "");
-
-        Vista v = new Vista(pasajero, vuelo, asiento);
-        controlador c = new controlador(v, vuelo, asiento, pasajero);
-        c.initController();
-    }
-     */
     private void mostrarInfo(String txt) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info:");
