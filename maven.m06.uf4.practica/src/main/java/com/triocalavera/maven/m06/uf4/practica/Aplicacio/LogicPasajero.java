@@ -9,7 +9,7 @@ import java.util.ArrayList;
  *
  * @author Victor Paz
  */
-public class LogicVuelo {
+public class LogicPasajero {
 
     /**
      * Metodo para obtener todos los vuelos que hay en la BBDD
