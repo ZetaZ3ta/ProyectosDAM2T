@@ -1,4 +1,4 @@
-package m06.uf4.practica.Aplicacio;
+package com.triocalavera.maven.m06.uf4.practica.Aplicacio;
 
 import java.util.ArrayList;
 import m06.uf4.practica.Aplicacio.Model.Vuelo;
