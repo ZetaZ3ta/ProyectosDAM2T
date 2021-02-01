@@ -1,9 +1,10 @@
-package m06.uf4.practica.Aplicacio;
+package com.triocalavera.maven.m06.uf4.practica.Aplicacio;
 
+import com.triocalavera.maven.m06.uf4.practica.Aplicacio.Model.Asiento;
 import java.util.ArrayList;
-import m06.uf4.practica.Aplicacio.Model.Asiento;
-import m06.uf4.practica.Dades.AsientoSQL;
-import m06.uf4.practica.Dades.DatosException;
+import com.triocalavera.maven.m06.uf4.practica.Aplicacio.AplicacionException;
+import com.triocalavera.maven.m06.uf4.practica.Dades.AsientoSQL;
+import com.triocalavera.maven.m06.uf4.practica.Dades.DatosException;
 
 /**
  *
