@@ -7,10 +7,16 @@ import java.util.ArrayList;
 
 /**
  *
- * @author ZetaZeta
+ * @author Victor Paz
  */
 public class LogicVuelo {
 
+    /**
+     * Metodo para obtener todos los vuelos que hay en la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
+     * @return
+     * @throws AplicacionException
+     */
     public static ArrayList<Vuelo> getVuelos() throws AplicacionException {
         try {
             DriverMySql conn;
@@ -25,6 +31,12 @@ public class LogicVuelo {
         }
     }
 
+    /**
+     * Metodo para insertar un vuelo en la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
+     * @param v
+     * @throws AplicacionException
+     */
     public static void insertarVuelo(Vuelo v) throws AplicacionException {
         try {
             DriverMySql conn;
@@ -36,6 +48,12 @@ public class LogicVuelo {
         }
     }
 
+    /**
+     * Metodo para eliminar un vuelo de la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
+     * @param v
+     * @throws AplicacionException
+     */
     public static void eliminarVuelo(Vuelo v) throws AplicacionException {
         try {
             DriverMySql conn;
@@ -43,10 +61,16 @@ public class LogicVuelo {
 
             VueloSQL.eliminarVuelo(conn.getConnection(), v);
         } catch (DatosException ex) {
-            throw new AplicacionException("Error insertando vuelo!");
+            throw new AplicacionException("Error eliminando vuelo!");
         }
     }
 
+    /**
+     * Metodo para modificar un vuelo de la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
+     * @param v
+     * @throws AplicacionException
+     */
     public static void modificarVuelo(Vuelo v) throws AplicacionException {
         try {
             DriverMySql conn;
@@ -54,7 +78,7 @@ public class LogicVuelo {
 
             VueloSQL.actualizarVuelo(conn.getConnection(), v);
         } catch (DatosException ex) {
-            throw new AplicacionException("Error insertando vuelo!");
+            throw new AplicacionException("Error modificando vuelo!");
         }
     }
 }
