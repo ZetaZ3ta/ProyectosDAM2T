@@ -18,7 +18,7 @@ import m06.uf4.practica.Aplicacio.Reglas.reglasPasajero;
  * @author leandroparedes
  */
 public class controlador {
-
+// Crearemos 3 arraysList de cada tipo de objeto
     static ArrayList<Vuelo> arrayVuelo;
     static ArrayList<Pasajero> arrayPasajeros;
     static ArrayList<Asiento> arrayAsiento;
@@ -26,7 +26,11 @@ public class controlador {
     static Scanner scanner = new Scanner(System.in);
 
     /**
-     *
+     * Crearemos objeteos de Vuelo,, Asiento,Pasajero 
+     * llamaremos al metodo cargarVuelo, despues el vuelo seleccionado no devolvará un objeto tipo vuelo que lo guararenos en nuestro objeto vuelo 
+     * verificaremos si hay asientos disponibles pasandoles el vuelo, seleccionará asiento nos devolverña un asiento, pediremos los datos del pasajero 
+     * crearemos el billete apartir del vuelo, asiento y pasajero. 
+     * Preguntaremos si ha acabado su turno para acabaar el programa 
      * @param args
      */
     public static void main(String[] args) {
@@ -57,7 +61,10 @@ public class controlador {
 
         } while (!acabarTurno);
     }
-
+/* Le pasaremos un objeto tipo Vuelo, este metodo recorrera la array de asientos y si hay algun asiento que nos dira que hay disponibilidad 
+sino nos lanzará una excepción 
+*/
+    
     private static void verificacionAsientoDisponible(Vuelo v) throws AplicacionException {
 
         boolean disponibilidad = false;
@@ -74,6 +81,12 @@ public class controlador {
         }
 
     }
+    /**
+    * Metodo que creará un billete recibira todos los objetos Vuelo, Asiento, Pasajero 
+    * se creara un billete unico, se creara el objeto pasajero y lo insertara, tambien modificando el asiento para que no este disponible
+    * imprimiremos todo 
+    * 
+    */
 
     private static void crearBillete(Vuelo v, Asiento as, Pasajero pas) {
         try {
@@ -99,7 +112,9 @@ public class controlador {
             mostrarInfo(e.toString());
         }
     }
-
+/*
+* caragara los vuelos para elegir 
+*/
     private static void cargarVuelo() {
         System.out.println("================");
         try {
@@ -113,7 +128,9 @@ public class controlador {
         }
 
     }
-
+/**
+* metodo que pedita todos los datos del pasagero, se verificara el DNI
+*/
     private static Pasajero datosPasajero() {
         String nombre = "", apellido = "", dni = "", respuesta;
         boolean datosCorrectos = false;
@@ -142,14 +159,18 @@ public class controlador {
         Pasajero pas = new Pasajero(dni, nombre, apellido);
         return pas;
     }
-
+/*
+* metodo que verifica la respuesta del usuario al usuario si acaba 
+*/
     private static boolean acabar(String respuesta) {
         if (respuesta.equals("s")) {
             return true;
         }
         return false;
     }
-
+/*
+* metodo que que pide al usuario el vuelo, si no tiene asiento creado, los creara 
+*/
     private static Vuelo seleccionarVuelo() {
         int vuelo;
         Vuelo vuel = new Vuelo();
@@ -170,6 +191,9 @@ public class controlador {
         }
         return vuel;
     }
+    /**
+    * Metodo que generará los asientos, se le pasará el objeto Vuelo 
+    */
 
     private static void generarAsientos(Vuelo v) throws AplicacionException {
 
@@ -178,7 +202,9 @@ public class controlador {
             LogicAsiento.insertarAsiento(a);
         }
     }
-
+/**
+* Carga los asientos dependiendo del numero de vuelo, si el asiento esta disponible lo imprimirá
+*/
     private static void cargarAsientos(Vuelo vuelo) {
         int vueloAsiento;
         System.out.println("================");
@@ -187,11 +213,9 @@ public class controlador {
 
             for (Asiento asiento : arrayAsiento) {
                 vueloAsiento = asiento.getNumVuelo().getNumVuelo();
-                if (vueloAsiento == vuelo.getNumVuelo()) {
                     if (!asiento.getLleno()) {
                         System.out.println(asiento.getIdAsiento());
                     }
-                }
             }
             System.out.println("================");
 
@@ -199,7 +223,10 @@ public class controlador {
             mostrarInfo(e.toString());
         }
     }
-
+/**
+* Metodo que retornará un asiento, pedira al usaurio que seleccioné un asiento y recorreremos la array hasta encontrar el asiento si no hay asiento lo volveremos ha preguntar
+* so lo encontramos as = Asiento y retornaremos as 
+*/
     private static Asiento seleccionarAsiento() {
 
         boolean asientoDisponible = false;
@@ -215,7 +242,7 @@ public class controlador {
                     System.out.println("Asiento Seleccionado Correctamente ");
                     as = asiento;
                     asientoDisponible = true;
-                }// throw new AplicacionException("Asiento no existe");
+                }
 
             }
         } while (!asientoDisponible);
