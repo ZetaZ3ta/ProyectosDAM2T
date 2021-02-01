@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package m06.uf4.practica.Presentacio;
 
+
+package com.triocalavera.maven.m06.uf4.practica.Presentacio;
+
+import com.triocalavera.maven.m06.uf4.practica.Aplicacio.AplicacionException;
+import com.triocalavera.maven.m06.uf4.practica.Aplicacio.*;
+import com.triocalavera.maven.m06.uf4.practica.Aplicacio.Model.*;
+import com.triocalavera.maven.m06.uf4.practica.Aplicacio.Reglas.reglasPasajero;
 import java.util.ArrayList;
-
 import java.util.Scanner;
-
-import m06.uf4.practica.Aplicacio.*;
-import m06.uf4.practica.Aplicacio.Model.*;
-import m06.uf4.practica.Aplicacio.Reglas.reglasPasajero;
 
 /**
  *
