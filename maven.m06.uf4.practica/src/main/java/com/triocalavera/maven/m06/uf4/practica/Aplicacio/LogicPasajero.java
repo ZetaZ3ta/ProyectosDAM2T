@@ -1,9 +1,9 @@
 package com.triocalavera.maven.m06.uf4.practica.Aplicacio;
 
+import com.triocalavera.maven.m06.uf4.practica.Aplicacio.Model.Pasajero;
+import com.triocalavera.maven.m06.uf4.practica.Dades.DatosException;
+import com.triocalavera.maven.m06.uf4.practica.Dades.PasajeroSQL;
 import java.util.ArrayList;
-import m06.uf4.practica.Aplicacio.Model.Vuelo;
-import m06.uf4.practica.Dades.DatosException;
-import m06.uf4.practica.Dades.VueloSQL;
 
 /**
  *
