@@ -26,7 +26,11 @@ public class controlador {
     static Scanner scanner = new Scanner(System.in);
 
     /**
-     *
+     * Crearemos objeteos de Vuelo,, Asiento,Pasajero 
+     * llamaremos al metodo cargarVuelo, despues el vuelo seleccionado no devolvará un objeto tipo vuelo que lo guararenos en nuestro objeto vuelo 
+     * verificaremos si hay asientos disponibles pasandoles el vuelo, seleccionará asiento nos devolverña un asiento, pediremos los datos del pasajero 
+     * crearemos el billete apartir del vuelo, asiento y pasajero. 
+     * Preguntaremos si ha acabado su turno para acabaar el programa 
      * @param args
      */
     public static void main(String[] args) {
