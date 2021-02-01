@@ -1,86 +1,84 @@
 package m06.uf4.practica.Aplicacio;
 
 import java.util.ArrayList;
-import m06.uf4.practica.Aplicacio.Model.Pasajero;
+import m06.uf4.practica.Aplicacio.Model.Vuelo;
 import m06.uf4.practica.Dades.DatosException;
-import m06.uf4.practica.Dades.PasajeroSQL;
+import m06.uf4.practica.Dades.VueloSQL;
 
 /**
  *
  * @author Victor Paz
  */
-public class LogicPasajero {
+public class LogicVuelo {
 
     /**
-     * Metodo para obtener todos los pasajeros que hay en la BBDD
+     * Metodo para obtener todos los vuelos que hay en la BBDD
      * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
      * @return
      * @throws AplicacionException
      */
-    public static ArrayList<Pasajero> getPasajeros() throws AplicacionException {
+    public static ArrayList<Vuelo> getVuelos() throws AplicacionException {
         try {
             DriverMySql conn;
-            ArrayList<Pasajero> ret;
+            ArrayList<Vuelo> ret;
 
             conn = DriverMySql.getInstance();
-            ret = PasajeroSQL.cargarPasajero(conn.getConnection());
+            ret = VueloSQL.cargarVuelo(conn.getConnection());
 
             return ret;
         } catch (DatosException ex) {
-            throw new AplicacionException("Error cargando pasajeros!");
-        }
-
-    }
-
-    /**
-     * Metodo para insertar un pasajero en la BBDD
-     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
-     * @param p
-     * @throws AplicacionException
-     */
-    public static void insertarPasajero(Pasajero p) throws AplicacionException {
-        try {
-            DriverMySql conn;
-            conn = DriverMySql.getInstance();
-
-            PasajeroSQL.insertarPasajero(conn.getConnection(), p);
-        } catch (DatosException ex) {
-            throw new AplicacionException("Error insertando pasajero!");
+            throw new AplicacionException("Error cargando vuelos!");
         }
     }
 
     /**
-     * Metodo para eliminar un pasajero de la BBDD
+     * Metodo para insertar un vuelo en la BBDD
      * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
-     * @param p
+     * @param v
      * @throws AplicacionException
      */
-    public static void eliminarPasajero(Pasajero p) throws AplicacionException {
+    public static void insertarVuelo(Vuelo v) throws AplicacionException {
         try {
             DriverMySql conn;
             conn = DriverMySql.getInstance();
 
-            PasajeroSQL.eliminarPasajero(conn.getConnection(), p);
+            VueloSQL.insertarVuelo(conn.getConnection(), v);
         } catch (DatosException ex) {
-            throw new AplicacionException("Error eliminando pasajero!");
+            throw new AplicacionException("Error insertando vuelo!");
         }
     }
 
     /**
-     * Metodo para modificar un pasajero de la BBDD
+     * Metodo para eliminar un vuelo de la BBDD
      * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
-     * @param p
+     * @param v
      * @throws AplicacionException
      */
-    public static void modificarPasajero(Pasajero p) throws AplicacionException {
+    public static void eliminarVuelo(Vuelo v) throws AplicacionException {
         try {
             DriverMySql conn;
             conn = DriverMySql.getInstance();
 
-            PasajeroSQL.actualizarPasajero(conn.getConnection(), p);
+            VueloSQL.eliminarVuelo(conn.getConnection(), v);
         } catch (DatosException ex) {
-            throw new AplicacionException("Error modificando pasajero!");
+            throw new AplicacionException("Error eliminando vuelo!");
         }
     }
 
+    /**
+     * Metodo para modificar un vuelo de la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
+     * @param v
+     * @throws AplicacionException
+     */
+    public static void modificarVuelo(Vuelo v) throws AplicacionException {
+        try {
+            DriverMySql conn;
+            conn = DriverMySql.getInstance();
+
+            VueloSQL.actualizarVuelo(conn.getConnection(), v);
+        } catch (DatosException ex) {
+            throw new AplicacionException("Error modificando vuelo!");
+        }
+    }
 }
