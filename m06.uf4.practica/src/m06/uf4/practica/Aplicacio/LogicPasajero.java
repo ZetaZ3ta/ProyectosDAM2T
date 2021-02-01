@@ -7,12 +7,13 @@ import m06.uf4.practica.Dades.PasajeroSQL;
 
 /**
  *
- * @author ZetaZeta
+ * @author Victor Paz
  */
 public class LogicPasajero {
 
     /**
-     *
+     * Metodo para obtener todos los pasajeros que hay en la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
      * @return
      * @throws AplicacionException
      */
@@ -32,7 +33,8 @@ public class LogicPasajero {
     }
 
     /**
-     *
+     * Metodo para insertar un pasajero en la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
      * @param p
      * @throws AplicacionException
      */
@@ -43,12 +45,13 @@ public class LogicPasajero {
 
             PasajeroSQL.insertarPasajero(conn.getConnection(), p);
         } catch (DatosException ex) {
-            throw new AplicacionException("Error insertando pasajeros!");
+            throw new AplicacionException("Error insertando pasajero!");
         }
     }
 
     /**
-     *
+     * Metodo para eliminar un pasajero de la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
      * @param p
      * @throws AplicacionException
      */
@@ -59,12 +62,13 @@ public class LogicPasajero {
 
             PasajeroSQL.eliminarPasajero(conn.getConnection(), p);
         } catch (DatosException ex) {
-            throw new AplicacionException("Error insertando pasajeros!");
+            throw new AplicacionException("Error eliminando pasajero!");
         }
     }
 
     /**
-     *
+     * Metodo para modificar un pasajero de la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
      * @param p
      * @throws AplicacionException
      */
@@ -75,7 +79,7 @@ public class LogicPasajero {
 
             PasajeroSQL.actualizarPasajero(conn.getConnection(), p);
         } catch (DatosException ex) {
-            throw new AplicacionException("Error insertando pasajeros!");
+            throw new AplicacionException("Error modificando pasajero!");
         }
     }
 

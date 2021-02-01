@@ -11,6 +11,8 @@ public class reglasPasajero {
 
     /**
      * Método para validar un DNI correcto.
+     * Comprueba que el formato del DNI sea correcto (8 numeros y una letra)
+     * Y tambien comprueba que la letra sea correcta segun los numeros que tenga.
      * @param Dni
      * @throws AplicacionException
      */

@@ -7,12 +7,13 @@ import m06.uf4.practica.Dades.DatosException;
 
 /**
  *
- * @author ZetaZeta
+ * @author Victor Paz
  */
 public class LogicAsiento {
 
     /**
-     *
+     * Metodo para obtener todos los asientos que hay en la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
      * @param numVuelo
      * @return
      * @throws AplicacionException
@@ -33,7 +34,8 @@ public class LogicAsiento {
     }
 
     /**
-     *
+     * Metodo para insertar un asiento en la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
      * @param a
      * @throws AplicacionException
      */
@@ -44,12 +46,13 @@ public class LogicAsiento {
 
             AsientoSQL.insertarAsiento(conn.getConnection(), a);
         } catch (DatosException ex) {
-            throw new AplicacionException("Error insertando asientos!");
+            throw new AplicacionException("Error insertando asiento!");
         }
     }
 
     /**
-     *
+     * Metodo para eliminar un asiento de la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
      * @param a
      * @throws AplicacionException
      */
@@ -60,12 +63,13 @@ public class LogicAsiento {
 
             AsientoSQL.eliminarAsiento(conn.getConnection(), a);
         } catch (DatosException ex) {
-            throw new AplicacionException("Error eliminando asientos!");
+            throw new AplicacionException("Error eliminando asiento!");
         }
     }
 
     /**
-     *
+     * Metodo para modificar un asiento de la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
      * @param a
      * @throws AplicacionException
      */
@@ -76,7 +80,7 @@ public class LogicAsiento {
 
             AsientoSQL.actualizarAsiento(conn.getConnection(), a);
         } catch (DatosException ex) {
-            throw new AplicacionException("Error modificando asientos!");
+            throw new AplicacionException("Error modificando asiento!");
         }
     }
 

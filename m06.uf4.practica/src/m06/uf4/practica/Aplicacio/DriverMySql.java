@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package m06.uf4.practica.Aplicacio;
 
 import java.sql.Connection;
@@ -16,7 +11,7 @@ import java.sql.SQLException;
 public class DriverMySql {
 
     private static volatile DriverMySql instance = null;
-    
+
     String bddd = "m06uf4p1";
     String usuario = "TrioCalavera";
     String pswd = "ElTrioCalaverita";
@@ -24,6 +19,7 @@ public class DriverMySql {
     private Connection conn = null;
 
     /**
+     * Metodo para coger la instancia de la BBDD con el patron Singleton
      *
      * @return @throws AplicacionException
      */
@@ -41,13 +37,11 @@ public class DriverMySql {
     }
 
     /**
-     *
+     * Con este metodo cogemos la conexion a la BBDD
      * @return @throws AplicacionException
      */
     public Connection getConnection() throws AplicacionException {
-        Connection ret = null;
-
-        ret = ConnectarBD();
+        Connection ret = ConnectarBD();
 
         return ret;
     }
@@ -76,6 +70,7 @@ public class DriverMySql {
 
     /**
      * Cierra la conexión
+     *
      * @throws AplicacionException
      */
     public void closeConnection() throws AplicacionException {

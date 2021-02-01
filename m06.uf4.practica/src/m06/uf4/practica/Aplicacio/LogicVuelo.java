@@ -7,12 +7,13 @@ import m06.uf4.practica.Dades.VueloSQL;
 
 /**
  *
- * @author ZetaZeta
+ * @author Victor Paz
  */
 public class LogicVuelo {
 
     /**
-     *
+     * Metodo para obtener todos los vuelos que hay en la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
      * @return
      * @throws AplicacionException
      */
@@ -31,7 +32,8 @@ public class LogicVuelo {
     }
 
     /**
-     *
+     * Metodo para insertar un vuelo en la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
      * @param v
      * @throws AplicacionException
      */
@@ -47,7 +49,8 @@ public class LogicVuelo {
     }
 
     /**
-     *
+     * Metodo para eliminar un vuelo de la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
      * @param v
      * @throws AplicacionException
      */
@@ -58,12 +61,13 @@ public class LogicVuelo {
 
             VueloSQL.eliminarVuelo(conn.getConnection(), v);
         } catch (DatosException ex) {
-            throw new AplicacionException("Error insertando vuelo!");
+            throw new AplicacionException("Error eliminando vuelo!");
         }
     }
 
     /**
-     *
+     * Metodo para modificar un vuelo de la BBDD
+     * Desde aqui llamaremos al metodo en la capa de datos donde se hace la query
      * @param v
      * @throws AplicacionException
      */
@@ -74,7 +78,7 @@ public class LogicVuelo {
 
             VueloSQL.actualizarVuelo(conn.getConnection(), v);
         } catch (DatosException ex) {
-            throw new AplicacionException("Error insertando vuelo!");
+            throw new AplicacionException("Error modificando vuelo!");
         }
     }
 }
