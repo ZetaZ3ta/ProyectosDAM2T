@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.triocalavera.maven.m06.uf4.practica.Aplicacio;
+package m06.uf4.practica.Aplicacio;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ *
+ * @author leandroparedes
+ */
 public class DriverMySql {
 
     private static volatile DriverMySql instance = null;
@@ -19,6 +18,11 @@ public class DriverMySql {
 
     private Connection conn = null;
 
+    /**
+     * Metodo para coger la instancia de la BBDD con el patron Singleton
+     *
+     * @return @throws AplicacionException
+     */
     public static DriverMySql getInstance() throws AplicacionException {
         if (instance == null) {
 
@@ -32,10 +36,12 @@ public class DriverMySql {
         return instance;
     }
 
+    /**
+     * Con este metodo cogemos la conexion a la BBDD
+     * @return @throws AplicacionException
+     */
     public Connection getConnection() throws AplicacionException {
-        Connection ret = null;
-
-        ret = ConnectarBD();
+        Connection ret = ConnectarBD();
 
         return ret;
     }
@@ -44,6 +50,12 @@ public class DriverMySql {
         this.ConnectarBD();
     }
 
+    /**
+     * Se conecta a una base de datos mysql y gestiona su conexión.
+     *
+     * @return Connection
+     * @throws SQLException
+     */
     private Connection ConnectarBD() throws AplicacionException {
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + bddd + "?useUnicode=true&"
@@ -56,6 +68,11 @@ public class DriverMySql {
         return conn;
     }
 
+    /**
+     * Cierra la conexión
+     *
+     * @throws AplicacionException
+     */
     public void closeConnection() throws AplicacionException {
         try {
             this.conn.close();
