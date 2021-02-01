@@ -23,7 +23,7 @@ import m06.uf4.practica.Aplicacio.Model.Vuelo;
 public class VueloSQL {
 
     /**
-     *
+     * Método donde se inserta en la base de datos un Vuelo, recibiendo como párametros una Conexión y un Vuelo.
      * @param con
      * @param v
      * @throws DatosException
@@ -48,7 +48,7 @@ public class VueloSQL {
     }
 
     /**
-     *
+     * Método donde se imprimen todos los vuelos actualizados en la base de datos.
      * @param con
      * @return
      * @throws DatosException
@@ -75,7 +75,7 @@ public class VueloSQL {
     }
 
     /**
-     *
+     * Método donde actualizamos un vuelo cogiendo el numero del vuelo para modificar este mismo.
      * @param con
      * @param v
      * @throws DatosException
@@ -104,7 +104,7 @@ public class VueloSQL {
     }
 
     /**
-     *
+     * Método que elimina un vuelo mediente una sentencia en la base de datos.
      * @param con
      * @param v
      * @throws DatosException

@@ -10,7 +10,7 @@ import m06.uf4.practica.Aplicacio.AplicacionException;
 public class reglasPasajero {
 
     /**
-     *
+     * Método para validar un DNI correcto.
      * @param Dni
      * @throws AplicacionException
      */

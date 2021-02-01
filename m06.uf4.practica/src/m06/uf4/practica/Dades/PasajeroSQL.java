@@ -22,7 +22,7 @@ import m06.uf4.practica.Aplicacio.Model.Vuelo;
 public class PasajeroSQL {
 
     /**
-     *
+     * Método donde se inserta en la base de datos un pasajero, recibiendo como párametros una Conexión y un Pasajero.
      * @param con
      * @param p
      * @throws DatosException
@@ -50,7 +50,7 @@ public class PasajeroSQL {
     }
 
     /**
-     *
+     * Método donde se imprimen todos los pasajeros actualizados en la base de datos.
      * @param con
      * @return
      * @throws DatosException
@@ -79,7 +79,7 @@ public class PasajeroSQL {
     }
 
     /**
-     *
+     * Método donde actualizamos un pasajero cogiendo el DNI del pasajero para modificar este mismo.
      * @param con
      * @param p
      * @throws DatosException
@@ -111,7 +111,7 @@ public class PasajeroSQL {
     }
 
     /**
-     *
+     * Método que elimina un pasajero mediente una sentencia en la base de datos.
      * @param con
      * @param p
      * @throws DatosException

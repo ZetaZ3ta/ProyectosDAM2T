@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class DriverMySql {
 
     private static volatile DriverMySql instance = null;
-
+    
     String bddd = "m06uf4p1";
     String usuario = "TrioCalavera";
     String pswd = "ElTrioCalaverita";
@@ -25,8 +25,7 @@ public class DriverMySql {
 
     /**
      *
-     * @return
-     * @throws AplicacionException
+     * @return @throws AplicacionException
      */
     public static DriverMySql getInstance() throws AplicacionException {
         if (instance == null) {
@@ -43,8 +42,7 @@ public class DriverMySql {
 
     /**
      *
-     * @return
-     * @throws AplicacionException
+     * @return @throws AplicacionException
      */
     public Connection getConnection() throws AplicacionException {
         Connection ret = null;
@@ -58,6 +56,12 @@ public class DriverMySql {
         this.ConnectarBD();
     }
 
+    /**
+     * Se conecta a una base de datos mysql y gestiona su conexión.
+     *
+     * @return Connection
+     * @throws SQLException
+     */
     private Connection ConnectarBD() throws AplicacionException {
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + bddd + "?useUnicode=true&"
@@ -71,7 +75,7 @@ public class DriverMySql {
     }
 
     /**
-     *
+     * Cierra la conexión
      * @throws AplicacionException
      */
     public void closeConnection() throws AplicacionException {

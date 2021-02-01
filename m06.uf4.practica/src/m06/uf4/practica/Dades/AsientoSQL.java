@@ -22,7 +22,7 @@ import m06.uf4.practica.Aplicacio.Model.Vuelo;
 public class AsientoSQL {
 
     /**
-     *
+     * Método donde se inserta en la base de datos un Asiento, recibiendo como párametros una Conexión y un Asiento.
      * @param con
      * @param a
      * @throws DatosException
@@ -47,7 +47,7 @@ public class AsientoSQL {
     }
 
     /**
-     *
+     * Método donde se imprimen todos los asientos actualizados en la base de datos.
      * @param con
      * @param NumVuelo
      * @return
@@ -76,10 +76,11 @@ public class AsientoSQL {
     }
         
     /**
-     *
+     * Método que pasamos por párametro un numVuelo(int), debido a que asiento tiene un objeto tipo Vuelo, y debemos coger su numero de vuelo,
+     * extrayendolo con este método para poder pasarlo al método de cargarAsiento.
      * @param numVuelo
      * @param conn
-     * @return
+     * @return vuelo
      * @throws DatosException
      */
     public static Vuelo getVuelo(int numVuelo, Connection conn) throws DatosException {
@@ -105,7 +106,7 @@ public class AsientoSQL {
     }  
 
     /**
-     *
+     * Método donde actualizamos un asiento cogiendo el id del asiento para modificar este mismo.
      * @param con
      * @param a
      * @throws DatosException
@@ -134,7 +135,7 @@ public class AsientoSQL {
     }
 
     /**
-     *
+     * Método que elimina un asiento mediente una sentencia en la base de datos.
      * @param con
      * @param a
      * @throws DatosException

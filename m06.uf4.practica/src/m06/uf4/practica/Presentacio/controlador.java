@@ -37,7 +37,7 @@ public class controlador {
         Pasajero pas;
         do {
             try {
-               
+
                 cargarVuelo();
                 v = seleccionarVuelo();
 
@@ -223,6 +223,11 @@ public class controlador {
         return as;
     }
 
+    /**
+     * Muestra un error
+     *
+     * @param txt
+     */
     private static void mostrarInfo(String txt) {
         System.out.println("Error: " + txt);
 
