@@ -1,5 +1,7 @@
 package m06.uf4.practica.Aplicacio;
 
+package com.triocalavera.maven.m06.uf4.practica.Aplicacio;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
